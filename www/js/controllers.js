@@ -18,7 +18,7 @@ angular.module('CovalentFitness.controllers', [])
   $scope.doSignup = function() {
     Auth.signup($scope.signupData)
       .then(function() {
-        $location.path('/home');
+        $location.path('/app/workouts'); // for right now
       })
       .catch(function(error) {
         console.error(error);
@@ -35,7 +35,7 @@ angular.module('CovalentFitness.controllers', [])
   $scope.doLogin = function() {
     Auth.login($scope.loginData)
       .then(function() {
-        $location.path('/home');
+        $location.path('/app/workouts'); // for right now
       })
       .catch(function(error) {
         console.error(error);
@@ -78,8 +78,8 @@ angular.module('CovalentFitness.controllers', [])
   };
 
   $scope.addWorkout = function() {
-    WorkoutServices.setWorkout(null)
-      .then($location.path('/app/add_edit_workout'));
+    WorkoutServices.setWorkout(null);
+    $location.path('/app/editWorkout'); // removed .then()
   };
 
   // $scope.shareWorkout = function() {
@@ -88,7 +88,7 @@ angular.module('CovalentFitness.controllers', [])
 
   $scope.editWorkout = function(wrkt) {
     WorkoutServices.setWorkout(wrkt)
-      .then($location.path('/app/add_edit_workout'));
+      .then($location.path('/app/editWorkout'));
   };
 
   $scope.loadWorkoutList();
@@ -110,14 +110,14 @@ angular.module('CovalentFitness.controllers', [])
 
   $scope.editWorkout = function(wrkt) {
     WorkoutServices.setWorkout(wrkt)
-      .then($location.path('/app/add_edit_workout'));
+      .then($location.path('/app/editWorkout'));
   };
 
   //nav ==========
 
   $scope.goBack = function() {
-    WorkoutServices.setWorkout(null)
-      .then($location.path('/app/workouts'));
+    WorkoutServices.setWorkout(null);
+    $location.path('/app/workouts'); // removed .then()
   };
 
   $scope.loadWorkout();
@@ -158,8 +158,8 @@ angular.module('CovalentFitness.controllers', [])
   $scope.currentWorkout = null;
 
   $scope.goBack = function() {
-    WorkoutServices.setWorkout(null)
-      .then($location.path('/app/workouts'));
+    WorkoutServices.setWorkout(null);
+    $location.path('/app/workouts'); // removed .then()
   };
 
   //right now edits send to server each time, maybe we can accumulate these here and send to server on 'save' or 'exit'.  We should talk about which we want.
