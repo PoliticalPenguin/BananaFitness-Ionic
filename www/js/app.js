@@ -51,33 +51,25 @@ angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'Cova
     url: '/app/login',
     templateUrl: '../views/login.html',
     controller: 'LoginCtrl'
-    });
-
-//NOTE: none of these are implemented yet!!!!!!!!!!
-
-    // .state('app', {
-    // url: '/app',
-    // abstract: true,
-    // templateUrl: '../views/workouts.html',
-    // controller: 'WorkoutsCtrl'
-    // });
-//   .state('app.search', {
-//     url: '/search',
-//     views: {
-//       'menuContent': {
-//         templateUrl: 'templates/search.html'
-//       }
-//     }
-//   })
-
-//   .state('app.browse', {
-//       url: '/browse',
-//       views: {
-//         'menuContent': {
-//           templateUrl: 'templates/browse.html'
-//         }
-//       }
-//     })
+    })
+    // route to list of workouts
+    .state('workouts', {
+    url: '/app/workouts',
+    templateUrl: '../views/workouts.html',
+    controller: 'WorkoutsCtrl'
+    })
+    // route to individual workout view
+    .state('workout', {
+    url: '/app/workout',
+    templateUrl: '../views/workout.html',
+    controller: 'WorkoutCtrl'
+    })
+    // route to workout editor (for new or edit workout)
+    .state('editWorkout', {
+    url: '/app/editWorkout',
+    templateUrl: '../views/addEditWorkout.html',
+    controller: 'WorkoutEditsCtrl'
+  });
 //     .state('app.playlists', {
 //       url: '/playlists',
 //       views: {
