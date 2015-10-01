@@ -38,20 +38,17 @@ angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'Cova
 
     .state('signupLogin', {
     url: '/app/signuplogin',
-    abstract: true,
-    templateUrl: '../views/signup.html'
+    templateUrl: '../views/signinLogin.html'
     })
 
     .state('signup', {
     url: '/app/signup',
-    abstract: true,
     templateUrl: '../views/signup.html',
     controller: 'SignupCtrl'
     })
 
     .state('login', {
     url: '/app/login',
-    abstract: true,
     templateUrl: '../views/login.html',
     controller: 'LoginCtrl'
     });
