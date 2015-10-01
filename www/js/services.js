@@ -5,7 +5,7 @@ services.factory('Auth', function($http, $location, $window) {
   var signup = function(user) {
     return $http({
         method: 'POST',
-        url: '/api/users/signup',
+        url: '/auth/signup',
         data: user
       })
       .then(function(resp) {
@@ -17,7 +17,7 @@ services.factory('Auth', function($http, $location, $window) {
   var login = function(user) {
     return $http({
         method: 'POST',
-        url: '/api/users/login',
+        url: '/auth/login',
         data: user
       })
       .then(function(resp) {
@@ -28,7 +28,7 @@ services.factory('Auth', function($http, $location, $window) {
   var logout = function() {
     return $http({
         method: 'POST',
-        url: '/api/users/logout',
+        url: '/auth/logout',
       })
       .then(function(resp) {
         // return resp.data.token;
