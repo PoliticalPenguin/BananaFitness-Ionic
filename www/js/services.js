@@ -76,7 +76,7 @@ services.factory('Auth', function($http, $location, $window) {
 
   wsi.addMoveToWorkout = function(moveInfoObj) {
     return $http({
-      method: 'PUT', // need a backend route for put
+      method: 'POST', // need a backend route for put
       url: '/api/moves/',
       data: moveInfoObj
     }).then(function(resp) {
@@ -84,7 +84,7 @@ services.factory('Auth', function($http, $location, $window) {
     });
   };
 
-  wsi.editMoveInWorkout = function(oldMoveInfoObj, newMoveInfoObj) {
+  wsi.editMoveInWorkout = function(oldMoveInfoObj, newMoveInfoObj) { // do ID for oldMoveInfoObj
     return $http({
       method: 'POST', // need a backend route for put
       url: '/api/moves/',
@@ -97,7 +97,7 @@ services.factory('Auth', function($http, $location, $window) {
     });
   };
 
-  wsi.deleteMoveFromWorkout = function(moveInfoObj) {
+  wsi.deleteMoveFromWorkout = function(moveInfoObj) { // change to ID
     return $http({
       method: 'DELETE', // need a backend route for delete
       url: '/api/moves/',
