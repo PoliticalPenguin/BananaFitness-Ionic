@@ -4,11 +4,12 @@
   - Clone the repo, and go into it
   - Run 'bower install'
   - Run 'npm install'
+  - Run 'ionic platform add ios'
 
-# App Simulation
+# Running it
   - ionic build ios
   - ionic emulate ios
-
+  
 # Debugging
   - ionic serve (This opens your app as a web app in your chrome. So you can use Chrome's console)
 
@@ -22,3 +23,6 @@
   1. After making changes on your inoic, rebase your feature branch with the latest master branch.
   2. Push your branch up to BananaFitness-Ionic
   3. Create a pull request
+
+#Build failure
+  - Try deleting the platform directory and rebuilding the app.
