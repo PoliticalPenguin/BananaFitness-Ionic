@@ -16,6 +16,24 @@ angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'Cova
   });
 })
 
+.config(["$httpProvider", function($httpProvider) {
+    $httpProvider.interceptors.push('middlewareAPI');
+}])
+
+.factory('middlewareAPI', function() {
+    return {
+        request: function(config) {
+            var url = config.url;
+            var pathArray = url.split('/');
+            var firstPath = pathArray[1];
+            if ((firstPath === 'api') || (firstPath === 'auth')){
+              config.url = "https://covalent-fitness-api.herokuapp.com" + config.url;
+            }
+            return config;
+        }
+    };
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
