@@ -18,7 +18,7 @@ angular.module('CovalentFitness.controllers', [])
   $scope.doSignup = function() {
     Auth.signup($scope.signupData)
       .then(function() {
-        $location.path('/app/workouts'); // for right now
+        $location.path('/api/workouts'); // for right now
       })
       .catch(function(error) {
         console.error(error);
@@ -35,7 +35,7 @@ angular.module('CovalentFitness.controllers', [])
   $scope.doLogin = function() {
     Auth.login($scope.loginData)
       .then(function() {
-        $location.path('/app/workouts'); // for right now
+        $location.path('/api/workouts');
       })
       .catch(function(error) {
         console.error(error);
@@ -53,7 +53,13 @@ angular.module('CovalentFitness.controllers', [])
   });
 
   $scope.doLogout = function() {
-    Auth.logout();
+    Auth.logout()
+      .then(function() {
+        $location.path('/app/signuplogin');
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
   };
 })
 
