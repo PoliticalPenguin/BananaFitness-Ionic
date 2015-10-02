@@ -73,8 +73,8 @@ angular.module('CovalentFitness.controllers', [])
   };
 
   $scope.selectWorkout = function(wrkt) {
-    WorkoutServices.setWorkout(wrkt)
-      .then($location.path('/app/workout'));
+    WorkoutServices.setWorkout(wrkt);
+    $location.path('/app/workout');
   };
 
   $scope.addWorkout = function() {
