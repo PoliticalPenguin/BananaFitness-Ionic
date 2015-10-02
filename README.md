@@ -25,4 +25,4 @@
   3. Create a pull request
 
 #Build failure
-  - Try deleting the platform directory and rebuilding the app.
+  - Try deleting the platforms directory, adding ios platform, and rebuilding the app.
