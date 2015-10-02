@@ -59,7 +59,7 @@ services.factory('Auth', function($http, $location, $window) {
   wsi.getAllWorkouts = function() {
     return $http({
       method: 'GET',
-      url: '/api/workouts/:' //I looked and can't find userid in the front end.  We can fix this later though.
+      url: '/api/workouts/e03fe43d-36a4-4506-aede-2d057f5dfe88' //I looked and can't find userid in the front end.  We can fix this later though.
     }).then(function(resp) {
       return resp.data;
     });
