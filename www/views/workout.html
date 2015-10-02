@@ -10,7 +10,7 @@
     </ion-header-bar>
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="move in workout" class="item-thumbnail-left">
+            <ion-item ng-repeat="move in workout track by $index" class="item-thumbnail-left">
                 <!-- <img ng-src="{{move.img}}"> if we want images-->
                 <h2>{{move.name}}</h2>
                 <h2>{{move.weight}}</h2>
