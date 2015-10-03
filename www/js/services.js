@@ -9,29 +9,28 @@ services.factory('Auth', function($http, $location, $window) {
         data: user
       })
       .then(function(resp) {
-        //Are we also using tokens?
-        // return resp.data.token;
+        return resp.data;
       });
   };
 
   var login = function(user) {
     return $http({
         method: 'POST',
-        url: '/auth/login',
+        url: '/auth/signin',
         data: user
       })
       .then(function(resp) {
-        // return resp.data.token;
+        return resp.data;
       });
   };
 
   var logout = function() {
     return $http({
         method: 'POST',
-        url: '/auth/logout',
+        url: '/auth/signup',
       })
       .then(function(resp) {
-        // return resp.data.token;
+        return resp.data;
       });
   };
 
