@@ -1,13 +1,7 @@
 <ion-view view-title="Workout" ng-controller="WorkoutCtrl">
-    <ion-header-bar align-title="left" class="bar-subheader">
-        <div class="buttons">
-            <button class="button" ng-click="goBack()">Back</button>
-        </div>
-        <h1 class="title">{{workout.name}}</h1>
-        <div class="buttons">
-            <button class="button" ng-click "editWorkout()">Add Exercise</button>
-        </div>
-    </ion-header-bar>
+    <ion-nav-buttons side="secondary">
+        <button class="button" ng-click="editWorkout()">Edit</button>
+    </ion-nav-buttons>
     <ion-content>
         <ion-list>
             <ion-item ng-repeat="move in workout track by $index" class="item-thumbnail-left">

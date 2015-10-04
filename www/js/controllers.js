@@ -88,9 +88,9 @@ angular.module('CovalentFitness.controllers', [])
     $location.path('/app/editWorkout'); // removed .then()
   };
 
-  // $scope.shareWorkout = function() {
-  //   //not sure if we want to do this yet.
-  // };
+  $scope.templateWorkout = function() {
+    //not sure if we want to do this yet.
+  };
 
   $scope.editWorkout = function(wrkt) {
     WorkoutServices.setWorkout(wrkt)
@@ -121,10 +121,10 @@ angular.module('CovalentFitness.controllers', [])
 
   //nav ==========
 
-  $scope.goBack = function() {
-    WorkoutServices.setWorkout(null);
-    $location.path('/app/workouts'); // removed .then()
-  };
+  // $scope.goBack = function() {
+  //   WorkoutServices.setWorkout(null);
+  //   $location.path('/app/workouts'); // removed .then()
+  // };
 
   $scope.loadWorkout();
 
@@ -163,10 +163,10 @@ angular.module('CovalentFitness.controllers', [])
   //workoutedits controller vars and functions ==========
   $scope.currentWorkout = null;
 
-  $scope.goBack = function() {
-    WorkoutServices.setWorkout(null);
-    $location.path('/app/workouts'); // removed .then()
-  };
+  // $scope.goBack = function() {
+  //   WorkoutServices.setWorkout(null);
+  //   $location.path('/app/workouts'); // removed .then()
+  // };
 
   //right now edits send to server each time, maybe we can accumulate these here and send to server on 'save' or 'exit'.  We should talk about which we want.
 
