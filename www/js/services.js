@@ -2,48 +2,92 @@ var services = angular.module('CovalentFitness.services', [])
 
 services.factory('Auth', function($http, $location, $window) {
 
-  var signup = function(user) {
+  var auth = {};
+
+  auth.signup = function(user) {
     return $http({
-        method: 'POST',
-        url: '/auth/signup',
-        data: user
-      })
-      .then(function(resp) {
-        return resp.data;
-      });
+      method: 'POST',
+      url: '/auth/signup',
+      data: user
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
   };
 
-  var login = function(user) {
+  auth.login = function(user) {
     return $http({
-        method: 'POST',
-        url: '/auth/signin',
-        data: user
-      })
-      .then(function(resp) {
-        return resp.data;
-      });
+      method: 'POST',
+      url: '/auth/signin',
+      data: user
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
   };
 
-  var logout = function() {
+  auth.logout = function() {
     return $http({
-        method: 'POST',
-        url: '/auth/signup',
-      })
-      .then(function(resp) {
-        return resp.data;
-      });
+      method: 'POST',
+      url: '/auth/signup',
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
   };
 
-  return {
-    signup: signup,
-    login: login,
-    logout: logout
+  return auth;
+})
+
+services.factory('Feed', function($http, $location, $window) {
+
+  var feed = {};
+
+  feed.getUniversalFeed = function(limit, lowestId) {
+    return $http({
+      method: 'GET',
+      url: '', //fill in once API is confirmed
+      params: {limit: limit, lowestId: lowestId}
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
   };
+
+  feed.getFollowingFeed = function(user, limit, lowestId) {
+    return $http({
+      method: 'GET',
+      url: '', //fill in once API is confirmed
+      params: {limit: limit, lowestId: lowestId}
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  return feed;
+})
+
+services.factory('Following', function($http) {
+
+  var following = {};
+
+  following.getFollowing = function(user) {
+    return $http({
+      method: 'GET',
+      url: '/api/follows/:' + user.id
+    })
+    .then(function(resp) {
+      return resp.data
+    })
+  };
+
+  return following;
 })
 
 //NOTE: I HAVENT PUT ROUTES TO SERVER IN YET, 
 
-.factory('WorkoutServices', function($http, $location, $window) {
+services.factory('WorkoutServices', function($http, $location, $window) {
   //wsi = workoutServicesInstance
   var wsi = {};
 

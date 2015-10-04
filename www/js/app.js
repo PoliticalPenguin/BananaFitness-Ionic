@@ -70,24 +70,36 @@ angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'Cova
       templateUrl: '../views/login.html',
       controller: 'LoginCtrl'
   })
-    // route to list of workouts
-    .state('workouts', {
-      url: '/app/workouts',
-      templateUrl: '../views/workouts.html',
-      controller: 'WorkoutsCtrl'
-    })
-    // route to individual workout view
-    .state('workout', {
-      url: '/app/workout',
-      templateUrl: '../views/workout.html',
-      controller: 'WorkoutCtrl'
-    })
-    // route to workout editor (for new or edit workout)
-    .state('editWorkout', {
-      url: '/app/editWorkout',
-      templateUrl: '../views/addEditWorkout.html',
-      controller: 'WorkoutEditsCtrl'
-    });
+  // route to list of universal feed of workouts
+  .state('universalfeed', {
+    url: '/app/workouts',
+    templateUrl: '../views/universalFeed.html',
+    controller: 'UniversalFeedCtrl'
+  })
+  // route to list of workouts from people whom you are following
+  .state('followingfeed', {
+    url: '/app/workouts',
+    templateUrl: '../views/followersFeed.html',
+    controller: 'FollowingFeedCtrl'
+  })
+  // route to list of people whom you are following
+  .state('following', {
+    url: '/app/following',
+    templateUrl: '../views/followersList.html',
+    controller: 'FollowingCtrl'
+  })
+  // route to individual workout view
+  .state('workout', {
+    url: '/app/workout',
+    templateUrl: '../views/workout.html',
+    controller: 'WorkoutCtrl'
+  })
+  // route to workout editor (for new or edit workout)
+  .state('editWorkout', {
+    url: '/app/editWorkout',
+    templateUrl: '../views/addEditWorkout.html',
+    controller: 'WorkoutEditsCtrl'
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/signuplogin');

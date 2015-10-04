@@ -63,6 +63,51 @@ angular.module('CovalentFitness.controllers', [])
   };
 })
 
+.controller('UniversalFeedCtrl', function($scope) {
+
+  $scope.UniversalFeed = {};
+
+  $scope.loadUniversalFeed = function() {
+    // 15 is the number to be loaded
+    Feed.getUniversalFeed(15, )
+      .then(function() {
+        //make me something
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+})
+
+.controller('FollowingFeedCtrl', function($scope) {
+
+  $scope.FollowingFeed = {};
+
+  $scope.loadFollowingFeed = function() {
+    // 15 is the number to be loaded
+    Feed.getUniversalFeed(15, )
+      .then(function() {
+        //make me something
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+})
+
+.controller('FollowingCtrl', function($scope) {
+
+  $scope.loadFollowing = function() {
+    Auth.signup($scope.signupData)
+      .then(function() {
+        $location.path('/api/workouts'); // for right now
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+})
+
 .controller('WorkoutsCtrl', function($scope, $location, WorkoutServices) {
   $scope.shouldShowDelete = false;
   $scope.listCanSwipe = true;
