@@ -1,0 +1,21 @@
+<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+    <div class="tabs">
+      <a class="tab-item active" href="#">
+        ALL
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        FOLLOWING
+      </a>
+    </div>
+  </div>
+
+<ion-view view-title="following">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="workout in workouts" href="#/app/playlists/{{playlist.id}}">
+        {{playlist.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

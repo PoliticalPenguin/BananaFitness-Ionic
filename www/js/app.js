@@ -69,7 +69,7 @@ angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'Cova
       url: '/app/login',
       templateUrl: '../views/login.html',
       controller: 'LoginCtrl'
-    })
+  })
     // route to list of workouts
     .state('workouts', {
       url: '/app/workouts',
