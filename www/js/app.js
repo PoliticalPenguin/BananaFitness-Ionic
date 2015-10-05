@@ -67,11 +67,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   });
 
-    stateProvider.state('tab.settings', {
-      url: '/settings',
-      views: {
-      'tab-settings': {
-        templateUrl: '../views/settings/settings.html'
+  //View the followers feed
+  stateProvider.state('tab.followersfeed', {
+    url: '/followersfeed',
+    views: {
+      'tab-followersfeed': {
+        templateUrl: '../views/feeds/followersFeed.html',
+        controller: 'FollowingFeedCtrl'
+      }
+    }
+  });
+
+  stateProvider.state('tab.settings', {
+    url: '/settings',
+    views: {
+    'tab-settings': {
+      templateUrl: '../views/settings/settings.html'
       }
     }
   });
