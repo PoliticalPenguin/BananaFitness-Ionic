@@ -38,16 +38,16 @@ app.factory('middlewareAPI', function() {
 app.config(function($stateProvider, $urlRouterProvider) {
   var stateProvider = $stateProvider
 
-  stateProvider.state('app', {
-    url: '/app',
+  stateProvider.state('menu', {
+    url: '/app/menu',
     abstract: true,
     templateUrl: '../views/menu.html',
     controller: 'AppCtrl'
   })
 
   // Using views because logout is a subview of menu
-  stateProvider.state('app.logout', {
-    url: '/logout',
+  stateProvider.state('menu.logout', {
+    url: '/app/menu/logout',
     views: {
       'menuContent': {
         templateUrl: '../views/logout.html'
