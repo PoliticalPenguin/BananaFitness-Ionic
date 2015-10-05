@@ -72,13 +72,8 @@ contollers.controller('UniversalFeedCtrl', function($scope) {
 
     Feed.getUniversalFeed(15, oldestListed.id)
       .then(function(feed) {
-        var sortedFeed = []
 
-        for (var i in feed) { sortedFeed.push(feed[i]); }
-
-        sortedFeed.sort(function(a, b) { b.id - a.id; })
-
-        $scope.UniversalFeed.concat(sortedFeed)
+        $scope.UniversalFeed.concat(feed)
 
       })
       .catch(function(error) {
@@ -93,17 +88,12 @@ contollers.controller('FollowingFeedCtrl', function($scope) {
 
   $scope.loadFollowingFeed = function() {
 
-      var oldestListed = $scope.FollowingFeed[length - 1]
+      var oldestListed = $scope.FollowingFeed[length - 1] || null
 
       Feed.getFollowingFeed(15, oldestListed.id)
         .then(function(feed) {
-          var sortedFeed = []
-          
-          for (var i in feed) { sortedFeed.push(feed[i]); }
 
-          sortedFeed.sort(function(a, b) { b.id - a.id; })
-
-          $scope.FollowingFeed.concat(sortedFeed)
+          $scope.FollowingFeed.concat(feed)
 
         })
         .catch(function(error) {
