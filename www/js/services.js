@@ -43,22 +43,20 @@ services.factory('Feed', function($http, $location, $window) {
 
   var feed = {};
 
-  feed.getUniversalFeed = function(limit, lowestId) {
+  feed.getUniversalFeed = function() {
     return $http({
       method: 'GET',
-      url: '', //fill in once API is confirmed
-      params: {limit: limit, lowestId: lowestId}
+      url: 'api/feed'
     })
     .then(function(resp) {
       return resp.data;
     });
   };
 
-  feed.getFollowingFeed = function(limit, lowestId) {
+  feed.getFollowingFeed = function() {
     return $http({
       method: 'GET',
-      url: '', //fill in once API is confirmed
-      params: {limit: limit, lowestId: lowestId}
+      url: 'api/feed/me'
     })
     .then(function(resp) {
       return resp.data;
@@ -75,7 +73,7 @@ services.factory('Following', function($http) {
   following.getFollowing = function() {
     return $http({
       method: 'GET',
-      url: '/api/follows/me' //This does not really work because of auth issues
+      url: '/api/follows/me'
     })
     .then(function(resp) {
       return resp.data

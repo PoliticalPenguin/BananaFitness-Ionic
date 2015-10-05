@@ -63,48 +63,49 @@ contollers.controller('LogoutCtrl', function($scope, $location, Auth) {
   };
 })
 
-contollers.controller('UniversalFeedCtrl', function($scope) {
+contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
 
   $scope.UniversalFeed = [];
 
   $scope.loadUniversalFeed = function() {
-    var oldestListed = $scope.UniversalFeed[length - 1]
-
-    Feed.getUniversalFeed(15, oldestListed.id)
+    Feed.getUniversalFeed()
       .then(function(feed) {
-
-        $scope.UniversalFeed.concat(feed)
-
+        $scope.UniversalFeed = feed
       })
       .catch(function(error) {
         console.error(error);
       });
   };
+
+  $scope.selectWorkout = function(wrkt) {
+    $location.path('/app/workout');
+  };
 })
 
-contollers.controller('FollowingFeedCtrl', function($scope) {
+contollers.controller('FollowingFeedCtrl', function($scope, $location, Feed, WorkoutServices) {
 
   $scope.FollowingFeed = [];
 
   $scope.loadFollowingFeed = function() {
-
-    var oldestListed = $scope.FollowingFeed[length - 1] || null
-
-    Feed.getFollowingFeed(15, oldestListed.id)
+    Feed.getFollowingFeed()
       .then(function(feed) {
-
-        $scope.FollowingFeed.concat(feed)
-
+        $scope.FollowingFeed = feed
       })
       .catch(function(error) {
         console.error(error);
       });
   };
+
+  $scope.selectWorkout = function(wrkt) {
+    WorkoutServices.setWorkout(wrkt);
+    $location.path('/app/workout');
+  };
+  
 });
 
 contollers.controller('FollowingCtrl', function($scope) {
 
-  $scope.followingUsers = {}
+  $scope.followingUsers = []
 
   $scope.loadFollowing = function() {
     Following.getFollowing()
