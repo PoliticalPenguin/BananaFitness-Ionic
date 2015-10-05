@@ -18,7 +18,7 @@ contollers.controller('SignupCtrl', function($scope, $location, Auth) {
   $scope.doSignup = function() {
     Auth.signup($scope.signupData)
       .then(function() {
-        $location.path('/api/workouts'); // for right now
+        $location.path('/app/workouts');
       })
       .catch(function(error) {
         console.error(error);
@@ -80,6 +80,9 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
   $scope.selectWorkout = function(wrkt) {
     $location.path('/app/workout');
   };
+
+  $scope.loadUniversalFeed();
+  
 })
 
 contollers.controller('FollowingFeedCtrl', function($scope, $location, Feed, WorkoutServices) {
@@ -100,7 +103,9 @@ contollers.controller('FollowingFeedCtrl', function($scope, $location, Feed, Wor
     WorkoutServices.setWorkout(wrkt);
     $location.path('/app/workout');
   };
-  
+
+  $scope.loadFollowingFeed();
+
 });
 
 contollers.controller('FollowingCtrl', function($scope) {
