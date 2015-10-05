@@ -75,7 +75,7 @@ services.factory('Following', function($http) {
   following.getFollowing = function() {
     return $http({
       method: 'GET',
-      url: '/api/follows/:' + user.id //This does not really work because of auth issues
+      url: '/api/follows/me' //This does not really work because of auth issues
     })
     .then(function(resp) {
       return resp.data
@@ -103,7 +103,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.getAllWorkouts = function() {
     return $http({
       method: 'GET',
-      url: '/api/workouts/e03fe43d-36a4-4506-aede-2d057f5dfe88' //I looked and can't find userid in the front end.  We can fix this later though.
+      url: '/api/workouts/me' //I looked and can't find userid in the front end.  We can fix this later though.
     }).then(function(resp) {
       return resp.data;
     });
@@ -113,7 +113,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
     console.log(wsi.selectedWorkout.id);
     return $http({
       method: 'GET',
-      url: '/api/moves' + wsi.selectedWorkout.id,
+      url: '/api/Moves/' + wsi.selectedWorkout.id,
     }).then(function(resp) {
       return resp.data;
     });

@@ -11,7 +11,7 @@ contollers.controller('AppCtrl', function($scope) {
 
 })
 
-contollers.controller('SignupCtrl', function($scope, Auth) {
+contollers.controller('SignupCtrl', function($scope, $location, Auth) {
 
   $scope.signupData = {};
 
@@ -26,7 +26,7 @@ contollers.controller('SignupCtrl', function($scope, Auth) {
   };
 })
 
-contollers.controller('LoginCtrl', function($scope, Auth) {
+contollers.controller('LoginCtrl', function($scope, $location, Auth) {
 
   // Form data for the login
   $scope.loginData = {};
@@ -35,7 +35,7 @@ contollers.controller('LoginCtrl', function($scope, Auth) {
   $scope.doLogin = function() {
     Auth.login($scope.loginData)
       .then(function() {
-        $location.path('/api/workouts');
+        $location.path('/app/workouts');
       })
       .catch(function(error) {
         console.error(error);

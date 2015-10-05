@@ -1,7 +1,6 @@
 <ion-view view-title="Your Workouts" ng-controller="WorkoutsCtrl">
-
     <ion-nav-buttons side="secondary">
-            <button class="button" ng-click="addWorkout()">NEW</button>
+        <button class="button" ng-click="addWorkout()">NEW</button>
     </ion-nav-buttons>
     <ion-content>
         <!-- maybe change subheader to footer or header bar, also think of changin buttons to clear for more modern look.  These changes can be done later though after we talk more about css and design of app -->
@@ -15,19 +14,16 @@
                     Use
                 </ion-option-button>
                 <ion-option-button class="button-assertive" ng-click="editWorkout(workout.id)">
-                    Edit 
+                    Edit
                 </ion-option-button>
                 <ion-delete-button class="ion-minus-circled" ng-click="workoutList.splice($index, 1)">
                 </ion-delete-button>
             </ion-item>
         </ion-list>
-
     </ion-content>
     <ion-tabs class="tabs-positive">
-  <ion-tab title="Workouts" href="/#/app/workouts"></ion-tab>
-  <ion-tab title="All" href="/#/app/universalfeed"></ion-tab>
-  <ion-tab title="Following" href="/#/app/followingfeed"></ion-tab>
-</ion-tabs>
+        <ion-tab title="Workouts" href="/#/app/workouts"></ion-tab>
+        <ion-tab title="All" href="/#/app/universalfeed"></ion-tab>
+        <ion-tab title="Following" href="/#/app/followingfeed"></ion-tab>
+    </ion-tabs>
 </ion-view>
-
-
