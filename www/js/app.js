@@ -1,4 +1,4 @@
-var app = angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'CovalentFitness.services'])
+var app = angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'CovalentFitness.services']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -14,12 +14,12 @@ app.run(function($ionicPlatform) {
       StatusBar.styleDefault();
     }
   });
-})
+});
 
 app.config(["$httpProvider", function($httpProvider) {
     $httpProvider.interceptors.push('middlewareAPI');
     $httpProvider.defaults.withCredentials = true;
-}])
+}]);
 
 app.factory('middlewareAPI', function() {
     return {
@@ -33,81 +33,79 @@ app.factory('middlewareAPI', function() {
             return config;
         }
     };
-})
+});
 
 app.config(function($stateProvider, $urlRouterProvider) {
-  var stateProvider = $stateProvider
+  var stateProvider = $stateProvider;
 
-  stateProvider.state('menu', {
-    url: '/app/menu',
+  //Tab top level.
+  stateProvider.state('tab', {
+    url: '/tab',
     abstract: true,
-    templateUrl: '../views/menu.html',
-    controller: 'AppCtrl'
-  })
+    templateUrl: '../views/tabs.html'
+  });
 
-  // Using views because logout is a subview of menu
-  stateProvider.state('menu.logout', {
-    url: '/app/menu/logout',
+  //View all the workouts
+  stateProvider.state('tab.workouts', {
+    url: '/workouts',
     views: {
-      'menuContent': {
-        templateUrl: '../views/logout.html'
+      'tab-workouts': {
+        templateUrl: '../views/workouts/workouts.html',
+        controller: 'WorkoutsCtrl'
       }
     }
-  })
+  });
 
-  stateProvider.state('signupLogin', {
-    url: '/app/signuplogin',
-    templateUrl: '../views/signinLogin.html'
-  })
+  //View the universal feed
+  stateProvider.state('tab.universalfeed', {
+    url: '/universalfeed',
+    views: {
+      'tab-universalfeed': {
+        templateUrl: '../views/feeds/universalFeed.html',
+        controller: 'UniversalFeedCtrl'
+      }
+    }
+  });
 
-  stateProvider.state('signup', {
-    url: '/app/signup',
-    templateUrl: '../views/signup.html',
-    controller: 'SignupCtrl'
-  })
+    stateProvider.state('tab.settings', {
+      url: '/settings',
+      views: {
+      'tab-settings': {
+        templateUrl: '../views/settings/settings.html'
+      }
+    }
+  });
 
-  stateProvider.state('login', {
-      url: '/app/login',
-      templateUrl: '../views/login.html',
-      controller: 'LoginCtrl'
-  })
-  // route to list of universal feed of workouts
-  stateProvider.state('universalfeed', {
-    url: '/app/universalfeed',
-    templateUrl: '../views/universalFeed.html',
-    controller: 'UniversalFeedCtrl'
-  })
-  // route to list of workouts from people whom you are following
-  stateProvider.state('followingfeed', {
-    url: '/app/followingfeed',
-    templateUrl: '../views/followersFeed.html',
-    controller: 'FollowingFeedCtrl'
-  })
-  // route to list of people whom you are following
-  stateProvider.state('following', {
-    url: '/app/following',
-    templateUrl: '../views/followersList.html',
-    controller: 'FollowingCtrl'
-  })
-  // route to list of workouts
-  stateProvider.state('workouts', {
-    url: '/app/workouts',
-    templateUrl: '../views/workouts.html',
-    controller: 'WorkoutsCtrl'
-  })
-  // route to individual workout view
-  stateProvider.state('workout', {
-    url: '/app/workout',
-    templateUrl: '../views/workout.html',
+  stateProvider.state('tab.workout', {
+    url: '/tab/workout',
+    templateUrl: '../views/workouts/workout.html',
     controller: 'WorkoutCtrl'
-  })
-  // route to workout editor (for new or edit workout)
+  });
+
   stateProvider.state('editWorkout', {
-    url: '/app/editWorkout',
-    templateUrl: '../views/addEditWorkout.html',
+    url: '/tab/editWorkout',
+    templateUrl: '../views/workouts/addEditWorkout.html',
     controller: 'WorkoutEditsCtrl'
   });
 
+  stateProvider.state('signupLogin', {
+    url: '/signuplogin',
+    templateUrl: '../views/auth/signupLogin.html'
+  });
+
+  stateProvider.state('signup', {
+    url: '/signup',
+    templateUrl: '../views/auth/signup.html',
+    controller: 'SignupCtrl'
+  });
+
+  stateProvider.state('login', {
+      url: '/login',
+      templateUrl: '../views/auth/login.html',
+      controller: 'LoginCtrl'
+  });
+
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/signuplogin');
+  $urlRouterProvider.otherwise('/signuplogin');
 });
