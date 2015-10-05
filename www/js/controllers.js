@@ -138,8 +138,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   };
 
   $scope.addWorkout = function() {
-    $scope.showPopup();
-    $location.path('/app/editWorkout'); // removed .then()
+    $scope.showPopup() // removed .then()
   };
 
   $scope.templateWorkout = function(wrkt) {
@@ -168,7 +167,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
         text: '<b>Save</b>',
         type: 'button-positive',
         onTap: function(e) {
-          if ($scope.newWorkout.name === null) {
+          if ($scope.newWorkout.name === undefined || $scope.newWorkout.name === null) {
             console.log('none entered');
             //don't allow the user to close unless he enters workout name
             e.preventDefault();
@@ -183,6 +182,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
 
     workoutPopup.then(function(res) {
       workoutPopup.close();
+      $location.path('/app/editWorkout');
     });
   };
 
@@ -244,7 +244,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   });
 
   //workoutedits controller vars and functions ==========
-  $scope.currentWorkout = null;
+  $scope.currentWorkout = [];
 
 
 
@@ -272,7 +272,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
 
   //need to if check current WO (blank or current) and set initial state
   if (WorkoutServices.selectedWorkout.id === null) {
-    $scope.currentWorkout = {};
+    $scope.currentWorkout = WorkoutServices.selectedWorkout;;
   } else {
     $scope.loacCurrentWorkout();
   }

@@ -3,6 +3,7 @@
         <button class="button" ng-click="addWorkout()">NEW</button>
     </ion-nav-buttons>
     <ion-content>
+    
         <!-- maybe change subheader to footer or header bar, also think of changin buttons to clear for more modern look.  These changes can be done later though after we talk more about css and design of app -->
         <ion-list show-delete="shouldShowDelete" can-swipe="listCanSwipe">
             <ion-item ng-repeat="workout in workoutList track by $index" class="item-thumbnail-left">
