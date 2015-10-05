@@ -147,8 +147,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   };
 
   $scope.editWorkout = function(wrkt) {
-    WorkoutServices.setWorkout(wrkt)
-      .then($location.path('/app/editWorkout'));
+    WorkoutServices.setWorkout(wrkt);
   };
 
   $scope.loadWorkoutList();
@@ -173,7 +172,15 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
             e.preventDefault();
           } else {
             console.log($scope.newWorkout.name);
-            WorkoutServices.setNewWorkoutName($scope.newWorkout.name);
+            WorkoutServices.addNewWorkout({
+              name: $scope.newWorkout.name
+            })
+            .then(function(resp){
+              resp.name = $scope.newWorkout.name;
+              WorkoutServices.setNewWorkout(resp);
+              console.log('in editWorkout', WorkoutServices.selectedWorkout);
+
+            });
             return $scope.newWorkout.name;
           }
         }

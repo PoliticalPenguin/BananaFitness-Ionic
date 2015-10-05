@@ -91,15 +91,15 @@ services.factory('WorkoutServices', function($http, $location, $window) {
 
   wsi.selectedWorkout = {
     id: null,
-    name:null
+    name: null
   };
 
   wsi.setWorkout = function(wrktID) {
     wsi.selectedWorkout.id = wrktID;
   };
   
-  wsi.setNewWorkoutName = function(name) {
-    wsi.selectedWorkout.name = name;
+  wsi.setNewWorkout = function(workout) {
+    wsi.selectedWorkout = workout;
   };
 
   wsi.getAllWorkouts = function() {
@@ -120,11 +120,23 @@ services.factory('WorkoutServices', function($http, $location, $window) {
     });
   };
 
+  wsi.addNewWorkout = function(newWorkoutObj) {
+    return $http({
+      method: 'POST', // need a backend route for put
+      url: '/api/workout/',
+      data: newWorkoutObj,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).then(function(resp) {
+      return resp.data;
+    });
+  };
+
   wsi.addMoveToWorkout = function(moveInfoObj) {
     return $http({
       method: 'POST', // need a backend route for put
       url: '/api/moves/',
-      data: moveInfoObj
+      data: moveInfoObj,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function(resp) {
       return resp.data;
     });
@@ -137,7 +149,8 @@ services.factory('WorkoutServices', function($http, $location, $window) {
       data: {
         oldMoveInfoObj: oldMoveInfoObj,
         newMoveInfoObj: newMoveInfoObj
-      }
+      },
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function(resp) {
       return resp.data;
     });
