@@ -99,16 +99,16 @@ contollers.controller('FollowingFeedCtrl', function($scope, $location, Feed, Wor
       });
   };
 
-  $scope.selectWorkout = function(wrkt) {
-    WorkoutServices.setWorkout(wrkt);
-    $location.path('/tab/workout');
-  };
+  // $scope.selectWorkout = function(wrkt) {
+  //   WorkoutServices.setWorkout(wrkt);
+  //   $location.path('/tab/workout');
+  // };
 
   $scope.loadFollowingFeed();
 
 });
 
-contollers.controller('FollowingCtrl', function($scope) {
+contollers.controller('FollowingCtrl', function($scope, $location, Following) {
 
   $scope.followingUsers = [];
 
@@ -116,6 +116,16 @@ contollers.controller('FollowingCtrl', function($scope) {
     Following.getFollowing()
       .then(function(followingUsers) {
         $scope.followingUsers = followingUsers;
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+
+  $scope.loadUser = function(id) {
+    Following.getUser(id)
+      .then(function(user) {
+        $location.path()
       })
       .catch(function(error) {
         console.error(error);

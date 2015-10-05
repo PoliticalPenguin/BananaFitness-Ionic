@@ -1,8 +1,9 @@
-<ion-view>
+<ion-view ng-controller=''>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="user in users" href="#/app/user/{{followingUsers.id}}">
-        {{ followingUsers.name }}
+      <ion-item ng-repeat="user in users">
+      <button class="button button-clear button-dark">
+          <h2>{{followingUsers.name}}</h2></button>
       </ion-item>
     </ion-list>
   </ion-content>

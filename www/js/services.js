@@ -29,7 +29,7 @@ services.factory('Auth', function($http, $location, $window) {
   auth.logout = function() {
     return $http({
       method: 'POST',
-      url: '/auth/signup',
+      url: '/auth/signout',
     })
     .then(function(resp) {
       return resp.data;
@@ -79,6 +79,16 @@ services.factory('Following', function($http) {
       return resp.data
     })
   };
+
+  // following.getUser = function(id) {
+  //   return $http({
+  //     method: 'GET',
+  //     url: '/api/' + id
+  //   })
+  //   .then(function(resp) {
+  //     return resp.data
+  //   })
+  // };
 
   return following;
 })

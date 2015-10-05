@@ -87,6 +87,35 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   });
 
+  stateProvider.state('tab.settings.myProfile', {
+    url: '/settings/myProfile',
+    views: {
+      'settings': {
+        templateUrl: '../views/settings/myProfile.html'
+      }
+    }
+  });
+
+  stateProvider.state('tab.settings.followinglist', {
+    url: '/settings/followinglist',
+    views: {
+      'settings': {
+        templateUrl: '../views/settings/followersList.html',
+        controller: 'FollowingCtrl'
+      }
+    }
+  });
+
+  stateProvider.state('tab.settings.logout', {
+    url: '/settings/logout',
+    views: {
+      'settings': {
+        templateUrl: '../views/auth/logout.html',
+        controller: 'LogoutCtrl'
+      }
+    }
+  });
+
   stateProvider.state('tab.workout', {
     url: '/tab/workout',
     templateUrl: '../views/workouts/workout.html',
