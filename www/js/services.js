@@ -54,7 +54,7 @@ services.factory('Feed', function($http, $location, $window) {
     });
   };
 
-  feed.getFollowingFeed = function(user, limit, lowestId) {
+  feed.getFollowingFeed = function(limit, lowestId) {
     return $http({
       method: 'GET',
       url: '', //fill in once API is confirmed
