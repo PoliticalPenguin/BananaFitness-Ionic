@@ -235,7 +235,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //*****NOTE the modal is unfinished*****
 
   // modal for collection edit info ==========
-  $ionicModal.fromTemplateUrl('../views/workoutEditsModal.html', {
+  $ionicModal.fromTemplateUrl('../views/workouts/workoutEditsModal.html', {
     scope: $scope,
     animation: 'slide-in-up' // I am having trouble finding an alternate animation. 
   }).then(function(modal) {
