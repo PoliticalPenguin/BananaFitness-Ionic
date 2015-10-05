@@ -272,7 +272,8 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
 
   //need to if check current WO (blank or current) and set initial state
   if (WorkoutServices.selectedWorkout.id === null) {
-    $scope.currentWorkout = WorkoutServices.selectedWorkout;;
+    $scope.currentWorkout = WorkoutServices.selectedWorkout;
+    console.log($scope.currentWorkout);
   } else {
     $scope.loacCurrentWorkout();
   }
