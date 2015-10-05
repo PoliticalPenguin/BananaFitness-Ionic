@@ -78,7 +78,7 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
   };
 
   $scope.selectWorkout = function(wrkt) {
-    $location.path('/app/workout');
+    $location.path('/tab/workout');
   };
 
   $scope.loadUniversalFeed();
@@ -148,7 +148,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
 
   $scope.templateWorkout = function(wrkt) {
     WorkoutServices.setWorkout(wrkt)
-      .then($location.path('/app/editWorkout'));
+      .then($location.path('/tab/editWorkout'));
   };
 
   $scope.editWorkout = function(wrkt) {
@@ -216,7 +216,7 @@ contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices
 
   $scope.editWorkout = function(wrkt) {
     WorkoutServices.setWorkout(wrkt)
-      .then($location.path('/app/editWorkout'));
+      .then($location.path('/tab/editWorkout'));
   };
 
 
@@ -235,7 +235,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //*****NOTE the modal is unfinished*****
 
   // modal for collection edit info ==========
-  $ionicModal.fromTemplateUrl('../views/workoutEditsModal.html', {
+  $ionicModal.fromTemplateUrl('../views/workouts/workoutEditsModal.html', {
     scope: $scope,
     animation: 'slide-in-up' // I am having trouble finding an alternate animation. 
   }).then(function(modal) {
