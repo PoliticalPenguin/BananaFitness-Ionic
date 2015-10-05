@@ -88,19 +88,19 @@ contollers.controller('FollowingFeedCtrl', function($scope) {
 
   $scope.loadFollowingFeed = function() {
 
-      var oldestListed = $scope.FollowingFeed[length - 1] || null
+    var oldestListed = $scope.FollowingFeed[length - 1] || null
 
-      Feed.getFollowingFeed(15, oldestListed.id)
-        .then(function(feed) {
+    Feed.getFollowingFeed(15, oldestListed.id)
+      .then(function(feed) {
 
-          $scope.FollowingFeed.concat(feed)
+        $scope.FollowingFeed.concat(feed)
 
-        })
-        .catch(function(error) {
-          console.error(error);
-        });
-    };
-  });
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+});
 
 contollers.controller('FollowingCtrl', function($scope) {
 
@@ -143,7 +143,8 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, WorkoutService
   };
 
   $scope.templateWorkout = function() {
-    //not sure if we want to do this yet.
+    WorkoutServices.setWorkout(wrkt)
+      .then($location.path('/app/editWorkout'));
   };
 
   $scope.editWorkout = function(wrkt) {

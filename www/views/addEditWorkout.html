@@ -9,12 +9,16 @@
     </ion-nav-buttons>
     <ion-content>
         <ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder" can-swipe="listCanSwipe">
-            <ion-item ng-repeat="move in workout track by $index" class="item-thumbnail-left">
+            <ion-item ng-repeat="move in currentWorkout track by $index" class="item-thumbnail-left">
                 <!-- <img ng-src="{{move.img}}"> if we want images-->
-                <h2>{{move.name}}</h2>
-                <h2>{{move.weight}}</h2>
-                <h2>{{move.sets}}</h2>
-                <h2>{{move.reps}}</h2>
+                <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
+                    <h2>{{move.name}}</h2></button>
+                <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
+                    <h2>{{move.weight}}</h2></button>
+                <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
+                    <h2>{{move.sets}}</h2></button>
+                <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
+                    <h2>{{move.reps}}</h2></button>
                 <!-- <p>{{move.description}}</p> if we want descriptions-->
                 <ion-option-button class="button-assertive" ng-click="deleteEx(move)">
                     Delete

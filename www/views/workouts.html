@@ -1,4 +1,5 @@
 <ion-view view-title="Your Workouts" ng-controller="WorkoutsCtrl">
+
     <ion-nav-buttons side="secondary">
             <button class="button" ng-click="addWorkout()">NEW</button>
     </ion-nav-buttons>
@@ -20,11 +21,13 @@
                 </ion-delete-button>
             </ion-item>
         </ion-list>
-    </ion-content>
-</ion-view>
 
-<ion-tabs class="tabs-positive">
+    </ion-content>
+    <ion-tabs class="tabs-positive">
   <ion-tab title="Workouts" href="/#/app/workouts"></ion-tab>
   <ion-tab title="All" href="/#/app/universalfeed"></ion-tab>
   <ion-tab title="Following" href="/#/app/followingfeed"></ion-tab>
 </ion-tabs>
+</ion-view>
+
+
