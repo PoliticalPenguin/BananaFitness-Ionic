@@ -237,12 +237,13 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   // modal for collection edit info ==========
   $ionicModal.fromTemplateUrl('../views/workouts/workoutEditsModal.html', {
     scope: $scope,
-    animation: 'slide-in-up' // I am having trouble finding an alternate animation. 
+    animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modal = modal
   })
 
   $scope.openModal = function() {
+    console.log('here');
     $scope.modal.show()
   }
 
@@ -262,12 +263,23 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
 
   //right now edits send to server each time, maybe we can accumulate these here and send to server on 'save' or 'exit'.  We should talk about which we want.
 
-  $scope.adEx = function() {
-    $scope.openModal.show();
+  $scope.addEx = function() {
+    $scope.openModal();
   };
 
-  $scope.editEx = function() {
-    //getting this figured out with modal *****
+  $scope.createMove = function(move) {
+    console.log(move);
+    WorkoutServices.addMoveToWorkout(move)
+      .then(function() {
+        $scope.loadCurrentWorkout();
+        $scope.closeModal();
+      });
+  };
+
+  $scope.editMove = function(move) {
+    console.log(move);
+
+    $scope.closeModal();
   };
 
   $scope.deleteEx = function(move) {

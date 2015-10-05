@@ -4,13 +4,10 @@
 
         <!-- <h1 class="title">{{workout.name}}</h1> -->
 
-            <button class="button" ng-click "addEx()">Add Exercise</button>
+            <button class="button button-icon ion-compose"ng-click="addEx()"></button>
 
     </ion-nav-buttons>
     <ion-content>
-        <ion-pane>
-            <h1>{{currentWorkout.name}}</h1>
-        </ion-pane>
         <ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder" can-swipe="listCanSwipe">
             <ion-item ng-repeat="move in currentWorkout track by $index" class="item-thumbnail-left">
                 <!-- <img ng-src="{{move.img}}"> if we want images-->
@@ -26,7 +23,7 @@
                 <ion-option-button class="button-assertive" ng-click="deleteEx(move)">
                     Delete
                 </ion-option-button>
-                <ion-option-button class="button-positive" ng-click="editEx(move)">
+                <ion-option-button class="button-positive" ng-click="modal.show(move)">
                     Edit
                 </ion-option-button>
                 <ion-delete-button class="ion-minus-circled" ng-click="workout.splice($index, 1)">
