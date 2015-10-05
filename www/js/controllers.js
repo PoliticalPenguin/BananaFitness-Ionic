@@ -44,7 +44,7 @@ contollers.controller('LoginCtrl', function($scope, $location, Auth) {
   };
 })
 
-contollers.controller('LogoutCtrl', function($scope, Auth) {
+contollers.controller('LogoutCtrl', function($scope, $location, Auth) {
 
   $ionicModal.fromTemplateUrl('views/logout.html', {
     scope: $scope
