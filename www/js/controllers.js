@@ -142,7 +142,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, WorkoutService
     $location.path('/app/editWorkout'); // removed .then()
   };
 
-  $scope.templateWorkout = function() {
+  $scope.templateWorkout = function(wrkt) {
     WorkoutServices.setWorkout(wrkt)
       .then($location.path('/app/editWorkout'));
   };
@@ -174,12 +174,7 @@ contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices
       .then($location.path('/app/editWorkout'));
   };
 
-  //nav ==========
 
-  // $scope.goBack = function() {
-  //   WorkoutServices.setWorkout(null);
-  //   $location.path('/app/workouts'); // removed .then()
-  // };
 
   $scope.loadWorkout();
 
@@ -218,10 +213,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //workoutedits controller vars and functions ==========
   $scope.currentWorkout = null;
 
-  // $scope.goBack = function() {
-  //   WorkoutServices.setWorkout(null);
-  //   $location.path('/app/workouts'); // removed .then()
-  // };
+
 
   //right now edits send to server each time, maybe we can accumulate these here and send to server on 'save' or 'exit'.  We should talk about which we want.
 

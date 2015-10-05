@@ -18,6 +18,7 @@ app.run(function($ionicPlatform) {
 
 app.config(["$httpProvider", function($httpProvider) {
     $httpProvider.interceptors.push('middlewareAPI');
+    $httpProvider.defaults.withCredentials = true;
 }])
 
 app.factory('middlewareAPI', function() {
