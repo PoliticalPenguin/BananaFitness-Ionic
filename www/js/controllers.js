@@ -194,7 +194,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
 
     workoutPopup.then(function(res) {
       workoutPopup.close();
-      $location.path('/app/editWorkout');
+      $location.path('/tab/editWorkout');
     });
   };
 
