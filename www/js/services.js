@@ -90,12 +90,16 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   var wsi = {};
 
   wsi.selectedWorkout = {
-    id: null
+    id: null,
+    name:null
   };
 
   wsi.setWorkout = function(wrktID) {
-    console.log('here');
     wsi.selectedWorkout.id = wrktID;
+  };
+  
+  wsi.setNewWorkoutName = function(name) {
+    wsi.selectedWorkout.name = name;
   };
 
   wsi.getAllWorkouts = function() {
@@ -108,7 +112,6 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   };
 
   wsi.getSpecificWorkout = function() {
-    console.log(wsi.selectedWorkout.id);
     return $http({
       method: 'GET',
       url: '/api/Moves/' + wsi.selectedWorkout.id,

@@ -118,10 +118,9 @@ contollers.controller('FollowingCtrl', function($scope) {
   };
 })
 
-contollers.controller('WorkoutsCtrl', function($scope, $location, WorkoutServices) {
+contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, WorkoutServices) {
   $scope.shouldShowDelete = false;
   $scope.listCanSwipe = true;
-
   $scope.workoutList = [];
 
   //functions for Workouts Controller ==========
@@ -139,7 +138,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, WorkoutService
   };
 
   $scope.addWorkout = function() {
-    WorkoutServices.setWorkout(null);
+    $scope.showPopup();
     $location.path('/app/editWorkout'); // removed .then()
   };
 
@@ -155,7 +154,40 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, WorkoutService
 
   $scope.loadWorkoutList();
 
+  //==========
+
+  $scope.showPopup = function() {
+    $scope.newWorkout = {};
+    var workoutPopup = $ionicPopup.show({
+      template: '<input type="text" ng-model="newWorkout.name">',
+      title: 'Enter New Workout Name',
+      scope: $scope,
+      buttons: [{
+        text: 'Cancel' , onTap: function(e) { return true; }
+      }, {
+        text: '<b>Save</b>',
+        type: 'button-positive',
+        onTap: function(e) {
+          if ($scope.newWorkout.name === null) {
+            console.log('none entered');
+            //don't allow the user to close unless he enters workout name
+            e.preventDefault();
+          } else {
+            console.log($scope.newWorkout.name);
+            WorkoutServices.setNewWorkoutName($scope.newWorkout.name);
+            return $scope.newWorkout.name;
+          }
+        }
+      }, ]
+    });
+
+    workoutPopup.then(function(res) {
+      workoutPopup.close();
+    });
+  };
+
 })
+
 
 contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices) {
 
@@ -219,7 +251,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //right now edits send to server each time, maybe we can accumulate these here and send to server on 'save' or 'exit'.  We should talk about which we want.
 
   $scope.adEx = function() {
-    //getting this figured out with modal *****
+    $scope.openModal.show();
   };
 
   $scope.editEx = function() {
