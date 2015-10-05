@@ -88,6 +88,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: '../views/followersList.html',
     controller: 'FollowingCtrl'
   })
+  // route to list of workouts
+  stateProvider.state('workouts', {
+    url: '/app/workouts',
+    templateUrl: '../views/workouts.html',
+    controller: 'WorkoutsCtrl'
+  })
   // route to individual workout view
   stateProvider.state('workout', {
     url: '/app/workout',
