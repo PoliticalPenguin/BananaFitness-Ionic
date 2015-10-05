@@ -1,6 +1,6 @@
-angular.module('CovalentFitness.controllers', [])
+var contollers = angular.module('CovalentFitness.controllers', [])
 
-.controller('AppCtrl', function($scope) {
+contollers.controller('AppCtrl', function($scope) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -11,7 +11,7 @@ angular.module('CovalentFitness.controllers', [])
 
 })
 
-.controller('SignupCtrl', function($scope, Auth) {
+contollers.controller('SignupCtrl', function($scope, Auth) {
 
   $scope.signupData = {};
 
@@ -26,7 +26,7 @@ angular.module('CovalentFitness.controllers', [])
   };
 })
 
-.controller('LoginCtrl', function($scope, Auth) {
+contollers.controller('LoginCtrl', function($scope, Auth) {
 
   // Form data for the login
   $scope.loginData = {};
@@ -44,7 +44,7 @@ angular.module('CovalentFitness.controllers', [])
   };
 })
 
-.controller('LogoutCtrl', function($scope, Auth) {
+contollers.controller('LogoutCtrl', function($scope, Auth) {
 
   $ionicModal.fromTemplateUrl('views/logout.html', {
     scope: $scope
@@ -63,15 +63,23 @@ angular.module('CovalentFitness.controllers', [])
   };
 })
 
-.controller('UniversalFeedCtrl', function($scope) {
+contollers.controller('UniversalFeedCtrl', function($scope) {
 
-  $scope.UniversalFeed = {};
+  $scope.UniversalFeed = [];
 
   $scope.loadUniversalFeed = function() {
-    // 15 is the number to be loaded
-    Feed.getUniversalFeed(15, )
-      .then(function() {
-        //make me something
+    var oldestListed = $scope.UniversalFeed[length - 1]
+
+    Feed.getUniversalFeed(15, oldestListed.id)
+      .then(function(feed) {
+        var sortedFeed = []
+
+        for (var i in feed) { sortedFeed.push(feed[i]); }
+
+        sortedFeed.sort(function(a, b) { b.id - a.id; })
+
+        $scope.UniversalFeed.concat(sortedFeed)
+
       })
       .catch(function(error) {
         console.error(error);
@@ -79,28 +87,39 @@ angular.module('CovalentFitness.controllers', [])
   };
 })
 
-.controller('FollowingFeedCtrl', function($scope) {
+contollers.controller('FollowingFeedCtrl', function($scope) {
 
-  $scope.FollowingFeed = {};
+  $scope.FollowingFeed = [];
 
   $scope.loadFollowingFeed = function() {
-    // 15 is the number to be loaded
-    Feed.getUniversalFeed(15, )
-      .then(function() {
-        //make me something
-      })
-      .catch(function(error) {
-        console.error(error);
-      });
-  };
-})
 
-.controller('FollowingCtrl', function($scope) {
+      var oldestListed = $scope.FollowingFeed[length - 1]
+
+      Feed.getFollowingFeed(15, oldestListed.id)
+        .then(function(feed) {
+          var sortedFeed = []
+          
+          for (var i in feed) { sortedFeed.push(feed[i]); }
+
+          sortedFeed.sort(function(a, b) { b.id - a.id; })
+
+          $scope.FollowingFeed.concat(sortedFeed)
+
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    };
+  });
+
+contollers.controller('FollowingCtrl', function($scope) {
+
+  $scope.followingUsers = {}
 
   $scope.loadFollowing = function() {
-    Auth.signup($scope.signupData)
-      .then(function() {
-        $location.path('/api/workouts'); // for right now
+    Following.getFollowing()
+      .then(function(followingUsers) {
+        $scope.followingUsers = followingUsers
       })
       .catch(function(error) {
         console.error(error);
@@ -108,7 +127,7 @@ angular.module('CovalentFitness.controllers', [])
   };
 })
 
-.controller('WorkoutsCtrl', function($scope, $location, WorkoutServices) {
+contollers.controller('WorkoutsCtrl', function($scope, $location, WorkoutServices) {
   $scope.shouldShowDelete = false;
   $scope.listCanSwipe = true;
 
@@ -146,7 +165,7 @@ angular.module('CovalentFitness.controllers', [])
 
 })
 
-.controller('WorkoutCtrl', function($scope, $location, WorkoutServices) {
+contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices) {
 
   $scope.workout = null;
 
@@ -175,7 +194,7 @@ angular.module('CovalentFitness.controllers', [])
 
 })
 
-.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModal, WorkoutServices) {
+contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModal, WorkoutServices) {
 
   // button func ==========
   $scope.shouldShowDelete = false;

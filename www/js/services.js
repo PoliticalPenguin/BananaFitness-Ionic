@@ -72,10 +72,10 @@ services.factory('Following', function($http) {
 
   var following = {};
 
-  following.getFollowing = function(user) {
+  following.getFollowing = function() {
     return $http({
       method: 'GET',
-      url: '/api/follows/:' + user.id
+      url: '/api/follows/:' + user.id //This does not really work because of auth issues
     })
     .then(function(resp) {
       return resp.data
