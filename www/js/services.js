@@ -96,6 +96,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   };
 
   wsi.setWorkout = function(wrktID) {
+    console.log('here');
     wsi.selectedWorkout.id = wrktID;
   };
 
@@ -109,9 +110,10 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   };
 
   wsi.getSpecificWorkout = function() {
+    console.log(wsi.selectedWorkout.id);
     return $http({
       method: 'GET',
-      url: '/api/moves:' + wsi.selectedWorkout.id,
+      url: '/api/moves' + wsi.selectedWorkout.id,
     }).then(function(resp) {
       return resp.data;
     });
