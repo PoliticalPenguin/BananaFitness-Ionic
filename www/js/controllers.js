@@ -165,7 +165,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
 
   $scope.selectWorkout = function(wrkt) {
     WorkoutServices.setWorkout(wrkt);
-    $location.path('/tab/workout');
+    $location.path('/workout');
   };
 
   $scope.addWorkout = function() {
@@ -209,8 +209,6 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
             .then(function(resp){
               resp.name = $scope.newWorkout.name;
               WorkoutServices.setNewWorkout(resp);
-              console.log('in editWorkout', WorkoutServices.selectedWorkout);
-
             });
             return $scope.newWorkout.name;
           }
@@ -254,7 +252,7 @@ contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices
 contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModal, WorkoutServices) {
 
   // button func ==========
-  $scope.shouldShowDelete = false;
+  // $scope.shouldShowDelete = false;
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true;
 
@@ -283,7 +281,6 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   });
 
   //workoutedits controller vars and functions ==========
-  $scope.currentWorkout = [];
 
   
 
@@ -295,6 +292,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
 
   $scope.createMove = function(move) {
     console.log(move);
+    move.workoutid = WorkoutServices.selectedWorkout.id;
     WorkoutServices.addMoveToWorkout(move)
       .then(function() {
         $scope.loadCurrentWorkout();
@@ -317,6 +315,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     WorkoutServices.getSpecificWorkout()
       .then(function(specWorkout) {
         $scope.currentWorkout = specWorkout;
+        console.log('here', $scope.currentWorkout);
       });
   };
 
@@ -325,6 +324,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     $scope.currentWorkout = WorkoutServices.selectedWorkout;
     console.log($scope.currentWorkout);
   } else {
-    $scope.loacCurrentWorkout();
+    console.log('outside in last controller')
+    $scope.loadCurrentWorkout();
   }
 });

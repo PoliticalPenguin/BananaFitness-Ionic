@@ -134,7 +134,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.getSpecificWorkout = function() {
     return $http({
       method: 'GET',
-      url: '/api/Moves/' + wsi.selectedWorkout.id,
+      url: '/api/Move/' + wsi.selectedWorkout.id,
     }).then(function(resp) {
       return resp.data;
     });
@@ -154,9 +154,9 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.addMoveToWorkout = function(moveInfoObj) {
     return $http({
       method: 'POST',
-      url: '/api/moves/',
+      url: '/api/move',
       data: moveInfoObj,
-      headers: {'Content-Type': 'application/JSON'}
+      headers: {'Content-Type': 'application/json'}
     }).then(function(resp) {
       return resp.data;
     });
@@ -165,12 +165,12 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.editMoveInWorkout = function(oldMoveInfoObj, newMoveInfoObj) { // do ID for oldMoveInfoObj
     return $http({
       method: 'POST', // need a backend route for put
-      url: '/api/moves/',
+      url: '/api/move/',
       data: {
         oldMoveInfoObj: oldMoveInfoObj,
         newMoveInfoObj: newMoveInfoObj
       },
-      headers: {'Content-Type': 'application/JSON'}
+      headers: {'Content-Type': 'application/json'}
     }).then(function(resp) {
       return resp.data;
     });
@@ -179,7 +179,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.deleteMoveFromWorkout = function(moveInfoObj) { // change to ID
     return $http({
       method: 'DELETE', // need a backend route for delete
-      url: '/api/moves/',
+      url: '/api/move/',
       data: moveInfoObj //specified workoutid, name, weight, rep, set
     }).then(function(resp) {
       return resp.data;

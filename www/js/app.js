@@ -105,8 +105,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'LogoutCtrl'
   });
 
-  stateProvider.state('tab.workout', {
-    url: '/tab/workout',
+  stateProvider.state('workout', {
+    url: '/workout',
     templateUrl: '../views/workouts/workout.html',
     controller: 'WorkoutCtrl'
   });
