@@ -125,7 +125,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
       method: 'POST', // need a backend route for put
       url: '/api/workout/',
       data: newWorkoutObj,
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      headers: {'Content-Type': 'application/JSON'}
     }).then(function(resp) {
       return resp.data;
     });
@@ -133,10 +133,10 @@ services.factory('WorkoutServices', function($http, $location, $window) {
 
   wsi.addMoveToWorkout = function(moveInfoObj) {
     return $http({
-      method: 'POST', // need a backend route for put
+      method: 'POST',
       url: '/api/moves/',
       data: moveInfoObj,
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      headers: {'Content-Type': 'application/JSON'}
     }).then(function(resp) {
       return resp.data;
     });
@@ -150,7 +150,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
         oldMoveInfoObj: oldMoveInfoObj,
         newMoveInfoObj: newMoveInfoObj
       },
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      headers: {'Content-Type': 'application/JSON'}
     }).then(function(resp) {
       return resp.data;
     });

@@ -235,7 +235,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //*****NOTE the modal is unfinished*****
 
   // modal for collection edit info ==========
-  $ionicModal.fromTemplateUrl('workoutEditsModal.html', {
+  $ionicModal.fromTemplateUrl('workoutAddModal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -259,7 +259,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //workoutedits controller vars and functions ==========
   $scope.currentWorkout = [];
 
-
+  
 
   //right now edits send to server each time, maybe we can accumulate these here and send to server on 'save' or 'exit'.  We should talk about which we want.
 
@@ -272,15 +272,15 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     WorkoutServices.addMoveToWorkout(move)
       .then(function() {
         $scope.loadCurrentWorkout();
-        $scope.closeModal();
+        $scope.closeModalAdd();
       });
   };
 
-  $scope.editMove = function(move) {
-    console.log(move);
+  // $scope.editMove = function(move) {
+  //   console.log(move);
 
-    $scope.closeModal();
-  };
+  //   $scope.closeModalEdit();
+  // };
 
   $scope.deleteEx = function(move) {
     WorkoutServices.deleteMoveFromWorkout(move)
