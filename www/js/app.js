@@ -81,10 +81,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
   stateProvider.state('tab.settings', {
     url: '/settings',
     views: {
-    'tab-settings': {
-      templateUrl: '../views/settings/settings.html'
+      'tab-settings': {
+        templateUrl: '../views/settings/settings.html'
       }
     }
+  });
+
+  stateProvider.state('myProfile', {
+    url: '/myProfile',
+    templateUrl: '../views/settings/myProfile.html',
+    controller: 'ProfileCtrl'
+  });
+
+  stateProvider.state('followinglist', {
+    url: '/following',
+    templateUrl: '../views/settings/followersList.html',
+    controller: 'FollowingCtrl'
+  });
+
+  stateProvider.state('logout', {
+    url: '/logout',
+    templateUrl: '../views/auth/logout.html',
+    controller: 'LogoutCtrl'
   });
 
   stateProvider.state('tab.workout', {

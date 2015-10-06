@@ -1,7 +1,7 @@
-<ion-view view-title="Followers Feed">
+<ion-view view-title="Following Feed">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="workout in workouts track by $index">
+      <ion-item ng-repeat="workout in FollowingFeed track by $index">
         <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
             <h2>{{workout.name}}</h2></button>
         <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">

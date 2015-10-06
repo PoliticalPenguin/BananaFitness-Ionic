@@ -46,12 +46,6 @@ contollers.controller('LoginCtrl', function($scope, $location, Auth) {
 
 contollers.controller('LogoutCtrl', function($scope, $location, Auth) {
 
-  $ionicModal.fromTemplateUrl('views/logout.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
   $scope.doLogout = function() {
     Auth.logout()
       .then(function() {
@@ -63,6 +57,28 @@ contollers.controller('LogoutCtrl', function($scope, $location, Auth) {
   };
 })
 
+contollers.controller('ProfileCtrl', function($scope, $location, Auth) {
+
+  $scope.personalData = [];
+
+  $scope.getPersonalInfo = function() {
+    Auth.getPersonalInfo()
+      .then(function(personalData) {
+        $scope.personalData = personalData
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+
+  $scope.navigate = function() {
+    $location.path('/tab/settings')
+  };
+
+  $scope.getPersonalInfo()
+
+})
+
 contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
 
   $scope.UniversalFeed = [];
@@ -70,6 +86,7 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
   $scope.loadUniversalFeed = function() {
     Feed.getUniversalFeed()
       .then(function(feed) {
+        console.log(feed);
         $scope.UniversalFeed = feed;
       })
       .catch(function(error) {
@@ -82,7 +99,6 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
   };
 
   $scope.loadUniversalFeed();
-  
 })
 
 contollers.controller('FollowingFeedCtrl', function($scope, $location, Feed, WorkoutServices) {
@@ -99,16 +115,16 @@ contollers.controller('FollowingFeedCtrl', function($scope, $location, Feed, Wor
       });
   };
 
-  $scope.selectWorkout = function(wrkt) {
-    WorkoutServices.setWorkout(wrkt);
-    $location.path('/tab/workout');
-  };
+  // $scope.selectWorkout = function(wrkt) {
+  //   WorkoutServices.setWorkout(wrkt);
+  //   $location.path('/tab/workout');
+  // };
 
   $scope.loadFollowingFeed();
 
 });
 
-contollers.controller('FollowingCtrl', function($scope) {
+contollers.controller('FollowingCtrl', function($scope, $location, Following) {
 
   $scope.followingUsers = [];
 
@@ -116,6 +132,16 @@ contollers.controller('FollowingCtrl', function($scope) {
     Following.getFollowing()
       .then(function(followingUsers) {
         $scope.followingUsers = followingUsers;
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+
+  $scope.loadUser = function(id) {
+    Following.getUser(id)
+      .then(function(user) {
+        $location.path()
       })
       .catch(function(error) {
         console.error(error);
