@@ -1,3 +1,19 @@
+BananaFit (powered by Ionic)
+
+  Social platform for fitness enthuiasts and their friends.
+
+  Allows the user to share workouts and follow the plans of others. A great way to have a collection of all your friends'
+  fitness plans.
+
+  Current implementations of collaborative fitness do not make it easy for users to create workout templates
+  that are easily usable/sharable with their friends. Current implementations do not allow users to access every detail
+  of other users workouts, which would helpful for those trying to achieve certain fitness goals.
+  
+  Bananafit provides a medium for collabortive sharing of fitness plans.
+
+Customer Endorsement
+  "Follow your fitness or at least the fitness of others" -Derrick
+
 # Setting up ionic on your computer
   - Run 'npm install -g ios-sim'
   - Run 'npm install -g cordova ionic'
