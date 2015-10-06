@@ -1,16 +1,21 @@
-<ion-content>
-  <ul class="list" ng-model="user">
-    <li class="item">
-      {{ user.name }}
-    </li>
-    <li class="item">
-      {{ user.location }}
-    </li>
-    <li class="item">
-      {{ user.age }}
-    </li>
-    <li class="item">
-      {{ user.username }}
-    </li>
-  </ul>
-</ion-content>
+<ion-view view-title="My Profile">
+  <ion-nav-buttons side="primary">
+      <i class="ion-arrow-left-c" ng-click='navigate()'></i> Back
+  </ion-nav-buttons>
+  <ion-content>
+    <ul class="list" ng-model="personalData">
+      <li class="item">
+        {{ personalData.name }}
+      </li>
+      <li class="item">
+        {{ personalData.location }}
+      </li>
+      <li class="item">
+        {{ personalData.age }}
+      </li>
+      <li class="item">
+        {{ personalData.username }}
+      </li>
+    </ul>
+  </ion-content>
+</ion-view>

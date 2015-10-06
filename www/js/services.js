@@ -36,6 +36,16 @@ services.factory('Auth', function($http, $location, $window) {
     });
   };
 
+  auth.getPersonalInfo = function() {
+    return $http({
+      method: 'GET',
+      url: 'https://covalent-fitness-api.herokuapp.com/api/user/me'
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
   return auth;
 })
 
@@ -46,7 +56,7 @@ services.factory('Feed', function($http, $location, $window) {
   feed.getUniversalFeed = function() {
     return $http({
       method: 'GET',
-      url: 'api/feed'
+      url: 'https://covalent-fitness-api.herokuapp.com/api/feed'
     })
     .then(function(resp) {
       return resp.data;
@@ -56,7 +66,7 @@ services.factory('Feed', function($http, $location, $window) {
   feed.getFollowingFeed = function() {
     return $http({
       method: 'GET',
-      url: 'api/feed/me'
+      url: 'https://covalent-fitness-api.herokuapp.com/api/feed/me'
     })
     .then(function(resp) {
       return resp.data;
