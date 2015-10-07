@@ -1,4 +1,4 @@
-var contollers = angular.module('CovalentFitness.controllers', [])
+var contollers = angular.module('CovalentFitness.controllers', ['timer'])
 
 contollers.controller('AppCtrl', function($scope) {
 
@@ -250,12 +250,32 @@ contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices
 })
 
 contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModal, WorkoutServices) {
+  $scope.startTime;
+  $scope.endTime;
+   
+  $scope.startTimer = function () {
+    $scope.$broadcast('timer-start');
+    $scope.startTime = moment()._d;
+    $scope.timerRunning = true;
+    console.log($scope.startTime);
+  };
+
+  $scope.stopTimer = function () {
+    $scope.$broadcast('timer-stop');
+    $scope.timerRunning = false;
+  };
+
+  // $scope.$on('timer-stopped', function (event, data) {
+  //   console.log('Timer Stopped - data = ', data);
+  // });
 
   // button func ==========
   // $scope.shouldShowDelete = false;
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true;
-
+  $scope.id = 1;
+  $scope.currentWorkout = [];
+  $scope.currentMove = {};
   //*****NOTE the modal is unfinished*****
 
   // modal for collection edit info ==========
@@ -290,14 +310,16 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     $scope.openModal();
   };
 
-  $scope.createMove = function(move) {
-    console.log(move);
-    move.workoutid = WorkoutServices.selectedWorkout.id;
-    WorkoutServices.addMoveToWorkout(move)
-      .then(function() {
-        $scope.loadCurrentWorkout();
-        $scope.closeModalAdd();
-      });
+  $scope.createMove = function(name, weight, reps) {
+    // move.workoutid = $scope.id++;
+    // WorkoutServices.addMoveToWorkout(move)
+    //   .then(function() {
+    //     $scope.loadCurrentWorkout();
+    //   });
+    // console.log(name);
+    $scope.currentWorkout.push({name:name, weight: weight, reps: reps, time: moment()._d});
+    console.log($scope.currentWorkout);
+    // $scope.closeModal();
   };
 
   // $scope.editMove = function(move) {
@@ -305,26 +327,31 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
 
   //   $scope.closeModalEdit();
   // };
+  $scope.stopWorkout = function () {
+    $scope.endTime = moment()._d;
+    $scope.closeModal();
+    console.log($scope.endTime);
+  };
 
   $scope.deleteEx = function(move) {
     WorkoutServices.deleteMoveFromWorkout(move)
       .then($scope.loadCurrentWorkout());
   };
 
-  $scope.loadCurrentWorkout = function() {
-    WorkoutServices.getSpecificWorkout()
-      .then(function(specWorkout) {
-        $scope.currentWorkout = specWorkout;
-        console.log('here', $scope.currentWorkout);
-      });
-  };
+  // $scope.loadCurrentWorkout = function() {
+  //   WorkoutServices.getSpecificWorkout()
+  //     .then(function(specWorkout) {
+  //       $scope.currentWorkout = specWorkout;
+  //       console.log('here', $scope.currentWorkout);
+  //     });
+  // };
 
-  //need to if check current WO (blank or current) and set initial state
-  if (WorkoutServices.selectedWorkout.id === null) {
-    $scope.currentWorkout = WorkoutServices.selectedWorkout;
-    console.log($scope.currentWorkout);
-  } else {
-    console.log('outside in last controller')
-    $scope.loadCurrentWorkout();
-  }
+  // //need to if check current WO (blank or current) and set initial state
+  // if (WorkoutServices.selectedWorkout.id === null) {
+  //   $scope.currentWorkout = WorkoutServices.selectedWorkout;
+  //   console.log($scope.currentWorkout);
+  // } else {
+  //   console.log('outside in last controller')
+  //   $scope.loadCurrentWorkout();
+  // }
 });
