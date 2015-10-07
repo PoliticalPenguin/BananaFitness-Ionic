@@ -1,4 +1,10 @@
 <ion-view view-title="Workout" ng-controller="WorkoutCtrl">
+    <ion-nav-buttons side="primary">
+        <button class="button back-button buttons button-clear header-item" style="color: black;" ng-click="$ionicGoBack()">
+            <i class="ion-arrow-left-c"></i> Back
+        </button>
+    </ion-nav-buttons>
+
     <ion-nav-buttons side="secondary">
         <button class="button" ng-click="editWorkout(workout.id)">Edit</button>
     </ion-nav-buttons>
@@ -6,9 +12,7 @@
         <ion-list>
             <ion-item ng-repeat="move in workout track by $index" class="item-thumbnail-left">
                 <!-- <img ng-src="{{move.img}}"> if we want images-->
-                <h2>{{move.name}}</h2>
-                <h2>{{move.weight}}</h2>
-                <h2>{{move.reps}}</h2>
+                <!-- <h2>{{move}}</h2> -->
                 <!-- <p>{{move.description}}</p> if we want descriptions-->
             </ion-item>
         </ion-list>

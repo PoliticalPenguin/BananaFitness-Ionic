@@ -147,6 +147,17 @@ services.factory('WorkoutServices', function($http, $location, $window) {
       data: newWorkoutObj,
       headers: {'Content-Type': 'application/JSON'}
     }).then(function(resp) {
+      console.log(resp);
+      return resp.data;
+    });
+  };
+
+  wsi.deleteWorkout = function(WorkoutObj) { // change to ID
+    return $http({
+      method: 'DELETE', 
+      url: '/api/workout/' + wsi.selectedWorkout.id,
+      data: WorkoutObj 
+    }).then(function(resp) {
       return resp.data;
     });
   };
