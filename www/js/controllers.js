@@ -198,13 +198,23 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
     var buttonCreateWorkout = {
       text: 'Work Out',
       type: 'button-positive',
-      onTap: function(e) {
-// Not making a database call here anymore. Instead we're setting the current workout to have our newly-chosen name, and id of null.
-        WorkoutServices.setNewWorkout({
-          name: $scope.newWorkout.name,
-          id: null
-        });
-      }
+        onTap: function(e) {
+          if ($scope.newWorkout.name === undefined || $scope.newWorkout.name === null) {
+            console.log('none entered');
+            //don't allow the user to close unless he enters workout name
+            e.preventDefault();
+          } else {
+            console.log($scope.newWorkout.name);
+            WorkoutServices.addNewWorkout({
+              name: $scope.newWorkout.name
+            })
+            .then(function(resp){
+              resp.name = $scope.newWorkout.name;
+              WorkoutServices.setNewWorkout(resp);
+            });
+            return $scope.newWorkout.name;
+          }
+        }
     };
 
     var workoutPopup = $ionicPopup.show({
