@@ -205,23 +205,16 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
     var buttonCreateWorkout = {
       text: 'Work Out',
       type: 'button-positive',
-        onTap: function(e) {
-          if ($scope.newWorkout.name === undefined || $scope.newWorkout.name === null) {
-            console.log('none entered');
-            //don't allow the user to close unless he enters workout name
-            e.preventDefault();
-          } else {
-            console.log($scope.newWorkout.name);
-            WorkoutServices.addNewWorkout({
-              name: $scope.newWorkout.name
-            })
-            .then(function(resp){
-              resp.name = $scope.newWorkout.name;
-              WorkoutServices.setNewWorkout(resp);
-            });
-            return $scope.newWorkout.name;
-          }
-        }
+      onTap: function(e) {
+// Not making a database call here anymore. Instead we're setting the current workout to have our newly-chosen name, and id of null.
+        WorkoutServices.setNewWorkout({
+          name: $scope.newWorkout.name,
+          id: null
+        });
+
+        console.log('WorkoutServices.selectedWorkout: ', WorkoutServices.selectedWorkout);
+      $location.path('/tab/editWorkout');
+      }
     };
 
     var workoutPopup = $ionicPopup.show({
@@ -231,10 +224,10 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
       buttons: [buttonCancel, buttonCreateWorkout]
     });
 
-    workoutPopup.then(function(res) {
-      workoutPopup.close();
-      $location.path('/tab/editWorkout');
-    });
+    // workoutPopup.then(function(res) {
+    //   workoutPopup.close();
+
+    // });
   };
 
 })
@@ -281,21 +274,19 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     $scope.timerRunning = false;
   };
 
-  // $scope.$on('timer-stopped', function (event, data) {
-  //   console.log('Timer Stopped - data = ', data);
-  // });
-
   $scope.currentWorkout = WorkoutServices.selectedWorkout;
+  $scope.currentWorkout.moves = [];
+  $scope.currentMove = {};
 
-  console.log("this is the ID of the workout we are editing ($scope.currentWorkout): ", $scope.currentWorkout);
   // button func ==========
   // $scope.shouldShowDelete = false;
 
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true;
   $scope.id = 1;
-  $scope.currentWorkout = [];
-  $scope.currentMove = {};
+
+  console.log("this is the workout object for the workout we are editing ($scope.currentWorkout): ", $scope.currentWorkout);
+
   //*****NOTE the modal is unfinished*****
 
   // modal for collection edit info ==========
@@ -335,44 +326,30 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     //     $scope.loadCurrentWorkout();
     //   });
     // console.log(name);
-    $scope.currentWorkout.push({name:name, weight: weight, reps: reps, time: moment()._d});
-    console.log($scope.currentWorkout);
+    $scope.currentWorkout.moves.push({name:name, weight: weight, reps: reps, time: moment()._d});
+    console.log($scope.currentWorkout.moves);
     // $scope.closeModal();
   };
 
-  // $scope.editMove = function(move) {
-  //   console.log(move);
 
-  //   $scope.closeModalEdit();
-  // };
   $scope.stopWorkout = function () {
     $scope.endTime = moment()._d;
     $scope.closeModal();
     console.log($scope.endTime);
+    if ($scope.currentWorkout.name !== null) {
+      WorkoutServices.addNewWorkout({
+        name: $scope.currentWorkout.name,
+      })
+      .then(function (resp) {
+        console.log('got this response from the db: ', resp);
+      });
+      
+    }
   };
 
-  $scope.deleteEx = function(move) {
-    WorkoutServices.deleteMoveFromWorkout(move)
-      .then($scope.loadCurrentWorkout());
-  };
-
-  // $scope.loadCurrentWorkout = function() {
-  //   WorkoutServices.getSpecificWorkout()
-  //     .then(function(specWorkout) {
-  //       $scope.currentWorkout = specWorkout;
-  //       console.log('here', $scope.currentWorkout);
-  //     });
+  // $scope.deleteEx = function(move) {
+  //   WorkoutServices.deleteMoveFromWorkout(move)
+  //     .then($scope.loadCurrentWorkout());
   // };
-
-  //We are no longer loading the current workout from the DB -Anton
-
-  // //need to if check current WO (blank or current) and set initial state
-  // if (WorkoutServices.selectedWorkout.id === null) {
-  //   $scope.currentWorkout = WorkoutServices.selectedWorkout;
-  //   console.log($scope.currentWorkout);
-  // } else {
-  //   console.log('outside in last controller')
-  //   $scope.loadCurrentWorkout();
-  // }
 
 });
