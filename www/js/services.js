@@ -134,7 +134,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.getSpecificWorkout = function() {
     return $http({
       method: 'GET',
-      url: '/api/move/' + wsi.selectedWorkout.id,
+      url: '/api/workout/' + wsi.selectedWorkout.id
     }).then(function(resp) {
       return resp.data;
     });
@@ -154,10 +154,11 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.addMoveToWorkout = function(moveInfoObj) {
     return $http({
       method: 'POST',
-      url: '/api/move',
+      url: '/api/move/',
       data: moveInfoObj,
       headers: {'Content-Type': 'application/json'}
     }).then(function(resp) {
+      console.log("this is the data returned by addMoveToWorkout: ", resp.data);
       return resp.data;
     });
   };

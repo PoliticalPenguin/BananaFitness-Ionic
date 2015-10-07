@@ -187,15 +187,17 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
 
   $scope.showPopup = function() {
     $scope.newWorkout = {};
-    var workoutPopup = $ionicPopup.show({
-      template: '<input type="text" ng-model="newWorkout.name">',
-      title: 'Enter New Workout Name',
-      scope: $scope,
-      buttons: [{
-        text: 'Cancel' , onTap: function(e) { return true; }
-      }, {
-        text: '<b>Save</b>',
-        type: 'button-positive',
+
+    var buttonCancel = {
+      text: 'Cancel', 
+      onTap: function (e) {
+        return true;
+      }
+    };
+
+    var buttonCreateWorkout = {
+      text: 'Work Out',
+      type: 'button-positive',
         onTap: function(e) {
           if ($scope.newWorkout.name === undefined || $scope.newWorkout.name === null) {
             console.log('none entered');
@@ -213,7 +215,13 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
             return $scope.newWorkout.name;
           }
         }
-      }, ]
+    };
+
+    var workoutPopup = $ionicPopup.show({
+      template: '<input type="text" ng-model="newWorkout.name" required>',
+      title: 'Enter New Workout Name',
+      scope: $scope,
+      buttons: [buttonCancel, buttonCreateWorkout]
     });
 
     workoutPopup.then(function(res) {
@@ -235,14 +243,15 @@ contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices
     WorkoutServices.getSpecificWorkout()
       .then(function(specWorkout) {
         $scope.workout = specWorkout;
+        console.log('loaded the workout: ', $scope.workout);
       });
   };
 
-  $scope.editWorkout = function(wrkt) {
-    WorkoutServices.setWorkout(wrkt)
-      .then($location.path('/tab/editWorkout'));
-  };
 
+  $scope.editWorkout = function(wrkt) {
+    WorkoutServices.setWorkout(wrkt);
+    $location.path('/tab/editWorkout');
+  };
 
 
   $scope.loadWorkout();
@@ -269,8 +278,12 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //   console.log('Timer Stopped - data = ', data);
   // });
 
+  $scope.currentWorkout = WorkoutServices.selectedWorkout;
+
+  console.log("this is the ID of the workout we are editing ($scope.currentWorkout): ", $scope.currentWorkout);
   // button func ==========
   // $scope.shouldShowDelete = false;
+
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true;
   $scope.id = 1;
@@ -287,7 +300,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   })
 
   $scope.openModal = function() {
-    console.log('here');
+    console.log('workoutAddModal.html template has been opened by the WorkoutEditsCtrl');
     $scope.modal.show()
   }
 
@@ -301,8 +314,6 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   });
 
   //workoutedits controller vars and functions ==========
-
-  
 
   //right now edits send to server each time, maybe we can accumulate these here and send to server on 'save' or 'exit'.  We should talk about which we want.
 
@@ -346,6 +357,8 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //     });
   // };
 
+  //We are no longer loading the current workout from the DB -Anton
+
   // //need to if check current WO (blank or current) and set initial state
   // if (WorkoutServices.selectedWorkout.id === null) {
   //   $scope.currentWorkout = WorkoutServices.selectedWorkout;
@@ -354,4 +367,5 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //   console.log('outside in last controller')
   //   $scope.loadCurrentWorkout();
   // }
+
 });
