@@ -170,6 +170,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
       headers: {'Content-Type': 'application/json'}
     }).then(function(resp) {
       console.log("this is the data returned by addMoveToWorkout: ", resp.data);
+      console.log("this is the ID of the workout we just created: ", resp.data.id);
       return resp.data;
     });
   };

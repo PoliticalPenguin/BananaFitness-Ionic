@@ -342,8 +342,22 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
       })
       .then(function (resp) {
         console.log('got this response from the db: ', resp);
+        console.log('here is the id of the workout we added: ', resp.id);
+        // Right now we are making a separate database call for each move. 
+        // We will need to change the server to call bulkCreate instead of findOrCreate at that route, 
+        // so that we only have to contact the server once. 
+        
+        $scope.currentWorkout.moves.forEach(function (move) {
+          move.workoutid = resp.id;
+          WorkoutServices.addMoveToWorkout(move)
+          .then(function (resp) {
+            console.log("this move got added to the db: ", resp);
+          });
+        });
       });
       
+    } else {
+      console.log("$scope.currentWorkout may be null. Here is $scope.currentWorkout: ", $scope.currentWorkout);
     }
   };
 
