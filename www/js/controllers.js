@@ -199,8 +199,11 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
       text: 'Work Out',
       type: 'button-positive',
       onTap: function(e) {
-// not making a database call here anymore
-
+// Not making a database call here anymore. Instead we're setting the current workout to have our newly-chosen name, and id of null.
+        WorkoutServices.setNewWorkout({
+          name: $scope.newWorkout.name,
+          id: null
+        });
       }
     };
 
@@ -265,9 +268,9 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //   console.log('Timer Stopped - data = ', data);
   // });
 
-  $scope.currentWorkout = {};
+  $scope.currentWorkout = WorkoutServices.selectedWorkout;
 
-  console.log("this is the ID of the workout we are editing: ", WorkoutServices.selectedWorkout.id);
+  console.log("this is the ID of the workout we are editing ($scope.currentWorkout): ", $scope.currentWorkout);
   // button func ==========
   // $scope.shouldShowDelete = false;
 
@@ -354,4 +357,5 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //   console.log('outside in last controller')
   //   $scope.loadCurrentWorkout();
   // }
+
 });
