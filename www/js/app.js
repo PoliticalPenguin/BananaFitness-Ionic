@@ -28,7 +28,7 @@ app.factory('middlewareAPI', function() {
             var pathArray = url.split('/');
             var firstPath = pathArray[1];
             if ((firstPath === 'api') || (firstPath === 'auth')){
-              config.url = "https://covalent-fitness-api.herokuapp.com" + config.url;
+              config.url = "https://penguin-banana-fitness-api.herokuapp.com" + config.url;
             }
             return config;
         }
