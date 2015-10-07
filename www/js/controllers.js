@@ -354,7 +354,8 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
             console.log("this move got added to the db: ", resp);
           });
         });
-        console.log('taking you back to /tab/workouts');
+
+        //Takes users back to the page with all their workouts. Can later take the user to, e.g., a workout summary page, etc.
         $location.path('/tab/workouts');
       });
       
