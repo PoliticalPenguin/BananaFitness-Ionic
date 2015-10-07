@@ -187,33 +187,28 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
 
   $scope.showPopup = function() {
     $scope.newWorkout = {};
+
+    var buttonCancel = {
+      text: 'Cancel', 
+      onTap: function (e) {
+        return true;
+      }
+    };
+
+    var buttonCreateWorkout = {
+      text: 'Work Out',
+      type: 'button-positive',
+      onTap: function(e) {
+// not making a database call here anymore
+
+      }
+    };
+
     var workoutPopup = $ionicPopup.show({
-      template: '<input type="text" ng-model="newWorkout.name">',
+      template: '<input type="text" ng-model="newWorkout.name" required>',
       title: 'Enter New Workout Name',
       scope: $scope,
-      buttons: [{
-        text: 'Cancel' , onTap: function(e) { return true; }
-      }, {
-        text: '<b>Save</b>',
-        type: 'button-positive',
-        onTap: function(e) {
-          if ($scope.newWorkout.name === undefined || $scope.newWorkout.name === null) {
-            console.log('none entered');
-            //don't allow the user to close unless he enters workout name
-            e.preventDefault();
-          } else {
-            console.log($scope.newWorkout.name);
-            WorkoutServices.addNewWorkout({
-              name: $scope.newWorkout.name
-            })
-            .then(function(resp){
-              resp.name = $scope.newWorkout.name;
-              WorkoutServices.setNewWorkout(resp);
-            });
-            return $scope.newWorkout.name;
-          }
-        }
-      }, ]
+      buttons: [buttonCancel, buttonCreateWorkout]
     });
 
     workoutPopup.then(function(res) {
@@ -270,9 +265,12 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //   console.log('Timer Stopped - data = ', data);
   // });
 
+  $scope.currentWorkout = {};
+
   console.log("this is the ID of the workout we are editing: ", WorkoutServices.selectedWorkout.id);
   // button func ==========
   // $scope.shouldShowDelete = false;
+
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true;
   $scope.id = 1;
@@ -345,6 +343,8 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //       console.log('here', $scope.currentWorkout);
   //     });
   // };
+
+  //We are no longer loading the current workout from the DB -Anton
 
   // //need to if check current WO (blank or current) and set initial state
   // if (WorkoutServices.selectedWorkout.id === null) {
