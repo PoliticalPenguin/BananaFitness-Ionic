@@ -235,14 +235,15 @@ contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices
     WorkoutServices.getSpecificWorkout()
       .then(function(specWorkout) {
         $scope.workout = specWorkout;
+        console.log('loaded the workout: ', $scope.workout);
       });
   };
 
-  $scope.editWorkout = function(wrkt) {
-    WorkoutServices.setWorkout(wrkt)
-      .then($location.path('/tab/editWorkout'));
-  };
 
+  $scope.editWorkout = function(wrkt) {
+    WorkoutServices.setWorkout(wrkt);
+    $location.path('/tab/editWorkout');
+  };
 
 
   $scope.loadWorkout();
@@ -269,6 +270,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   //   console.log('Timer Stopped - data = ', data);
   // });
 
+  console.log("this is the ID of the workout we are editing: ", WorkoutServices.selectedWorkout.id);
   // button func ==========
   // $scope.shouldShowDelete = false;
   $scope.shouldShowReorder = false;
@@ -287,7 +289,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   })
 
   $scope.openModal = function() {
-    console.log('here');
+    console.log('workoutAddModal.html template has been opened by the WorkoutEditsCtrl');
     $scope.modal.show()
   }
 
@@ -301,8 +303,6 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   });
 
   //workoutedits controller vars and functions ==========
-
-  
 
   //right now edits send to server each time, maybe we can accumulate these here and send to server on 'save' or 'exit'.  We should talk about which we want.
 
