@@ -9,16 +9,11 @@
             <ion-item ng-repeat="workout in workoutList track by $index" class="item-thumbnail-left">
                 <img src = "http://pspfitness.com/wp-content/uploads/2014/01/Sports-Dumbbell-icon.png">
                 <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
-                    <h2>{{workout.name}}</h2></button>
+                    <h2>{{workout.name}}</h2>
+                </button>
                 <!-- <p>{{workout.description}}</p> if we want descriptions-->
-                <ion-option-button class="button-positive" ng-click="templateWorkout(workout.id)">
-                    Use
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="editWorkout(workout.id)">
-                    Edit
-                </ion-option-button>
-                <ion-delete-button class="ion-minus-circled" ng-click="workoutList.splice($index, 1)">
-                    Deleteeeeeeeeeee
+                <ion-option-button class="ion-minus-circled" ng-click="workoutList.splice($index, 1); deleteWorkout(workout.id)">
+                    Delete
                 </ion-delete-button>
             </ion-item>
         </ion-list>

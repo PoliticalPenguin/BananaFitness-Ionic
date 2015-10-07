@@ -164,8 +164,15 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   };
 
   $scope.selectWorkout = function(wrkt) {
+    console.log(wrkt);
     WorkoutServices.setWorkout(wrkt);
     $location.path('/workout');
+  };
+
+  $scope.deleteWorkout = function(wrkt) {
+    console.log(wrkt);
+    WorkoutServices.setWorkout(wrkt);
+    WorkoutServices.deleteWorkout(wrkt);
   };
 
   $scope.addWorkout = function() {
