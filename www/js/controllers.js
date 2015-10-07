@@ -213,7 +213,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
         });
 
         console.log('WorkoutServices.selectedWorkout: ', WorkoutServices.selectedWorkout);
-      $location.path('/tab/editWorkout');
+        $location.path('/tab/editWorkout');
       }
     };
 
@@ -346,7 +346,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
         // Right now we are making a separate database call for each move. 
         // We will need to change the server to call bulkCreate instead of findOrCreate at that route, 
         // so that we only have to contact the server once. 
-        
+
         $scope.currentWorkout.moves.forEach(function (move) {
           move.workoutid = resp.id;
           WorkoutServices.addMoveToWorkout(move)
@@ -354,6 +354,8 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
             console.log("this move got added to the db: ", resp);
           });
         });
+        console.log('taking you back to /tab/workouts');
+        $location.path('/tab/workouts');
       });
       
     } else {
