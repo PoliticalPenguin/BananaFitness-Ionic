@@ -134,7 +134,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.getSpecificWorkout = function() {
     return $http({
       method: 'GET',
-      url: '/api/Move/' + wsi.selectedWorkout.id,
+      url: '/api/move/' + wsi.selectedWorkout.id,
     }).then(function(resp) {
       return resp.data;
     });
