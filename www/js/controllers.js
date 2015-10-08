@@ -1,4 +1,4 @@
-var contollers = angular.module('CovalentFitness.controllers', ['timer'])
+var contollers = angular.module('CovalentFitness.controllers', ['timer', 'chart.js'])
 
 contollers.controller('AppCtrl', function($scope) {
 
@@ -85,6 +85,19 @@ contollers.controller('ProfileCtrl', function($scope, $location, $http, Auth) {
 
   $scope.getPersonalInfo()
 
+})
+
+contollers.controller('GraphCtrl', function($scope, $location) {
+  $scope.graph = {};
+
+  $scope.graph.data = [                     // Add bar data, this will set your bars height in the graph
+      //Awake
+      [16, 15, 20, 12, 16, 12, 8],
+      //Asleep
+      [8, 9, 4, 12, 8, 12, 14]
+    ];
+    $scope.graph.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];    // Add labels for the X-axis
+    $scope.graph.series = ['Awake', 'Asleep'];  // Add information for the hover/touch effect
 })
 
 contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
