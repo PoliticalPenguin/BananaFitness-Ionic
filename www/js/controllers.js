@@ -164,10 +164,19 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   };
 
   $scope.selectWorkout = function(wrkt) {
-    console.log(wrkt);
-    WorkoutServices.setWorkout(wrkt);
-    $location.path('/workout');
+    console.log("here is the workout id being selected: ", wrkt);
+    WorkoutServices.getSpecificWorkout(wrkt)
+      .then(function(specWorkout) {
+        console.log('loaded the workout: ', specWorkout);
+        WorkoutServices.setNewWorkout({
+          name: $scope.newWorkout.name,
+          id: null
+        });
+        $location.path('/tab/editWorkout');
+      });
   };
+
+
 
   $scope.deleteWorkout = function(wrkt) {
     console.log(wrkt);
