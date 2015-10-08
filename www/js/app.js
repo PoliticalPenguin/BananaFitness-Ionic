@@ -28,8 +28,8 @@ app.factory('middlewareAPI', function() {
             var pathArray = url.split('/');
             var firstPath = pathArray[1];
             if ((firstPath === 'api') || (firstPath === 'auth')){
-              config.url = "https://covalent-fitness-api.herokuapp.com" + config.url;
-              //Our server: https://penguin-banana-fitness-api.herokuapp.com/
+              // config.url = "http://localhost:8080" + config.url;
+              config.url = "https://penguin-banana-fitness-api.herokuapp.com" + config.url;
             }
             return config;
         }
@@ -75,6 +75,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
       'tab-followersfeed': {
         templateUrl: './views/feeds/followersFeed.html',
         controller: 'FollowingFeedCtrl'
+      }
+    }
+  });
+
+  stateProvider.state('tab.graphs', {
+    url: '/graphs',
+    views: {
+      'tab-graphs': {
+        templateUrl: '../views/graphs/graphs.html',
+        controller: 'GraphCtrl'
       }
     }
   });

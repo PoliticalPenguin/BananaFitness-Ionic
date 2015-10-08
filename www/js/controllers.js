@@ -1,4 +1,4 @@
-var contollers = angular.module('CovalentFitness.controllers', ['timer'])
+var contollers = angular.module('CovalentFitness.controllers', ['timer', 'chart.js'])
 
 contollers.controller('AppCtrl', function($scope) {
 
@@ -36,6 +36,7 @@ contollers.controller('LoginCtrl', function($scope, $location, Auth) {
     Auth.login($scope.loginData)
       .then(function() {
         $location.path('/tab/workouts');
+        window.open('https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/authorize');
       })
       .catch(function(error) {
         console.error(error);
@@ -57,9 +58,16 @@ contollers.controller('LogoutCtrl', function($scope, $location, Auth) {
   };
 })
 
-contollers.controller('ProfileCtrl', function($scope, $location, Auth) {
+contollers.controller('ProfileCtrl', function($scope, $location, $http, Auth) {
 
   $scope.personalData = [];
+
+  $http({
+      method: 'GET',
+      url: 'https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/request'
+    }).then(function(resp) {
+      console.log(resp);
+    });
 
   $scope.getPersonalInfo = function() {
     Auth.getPersonalInfo()
@@ -77,6 +85,19 @@ contollers.controller('ProfileCtrl', function($scope, $location, Auth) {
 
   $scope.getPersonalInfo()
 
+})
+
+contollers.controller('GraphCtrl', function($scope, $location) {
+  $scope.graph = {};
+
+  $scope.graph.data = [                     // Add bar data, this will set your bars height in the graph
+      //Awake
+      [16, 15, 20, 12, 16, 12, 8],
+      //Asleep
+      [8, 9, 4, 12, 8, 12, 14]
+    ];
+    $scope.graph.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];    // Add labels for the X-axis
+    $scope.graph.series = ['Awake', 'Asleep'];  // Add information for the hover/touch effect
 })
 
 contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
