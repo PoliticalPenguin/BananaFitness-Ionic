@@ -43,7 +43,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   stateProvider.state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: '../views/tabs.html'
+    templateUrl: './views/tabs.html'
   });
 
   //View all the workouts
@@ -51,7 +51,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/workouts',
     views: {
       'tab-workouts': {
-        templateUrl: '../views/workouts/workouts.html',
+        templateUrl: './views/workouts/workouts.html',
         controller: 'WorkoutsCtrl'
       }
     }
@@ -62,7 +62,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/universalfeed',
     views: {
       'tab-universalfeed': {
-        templateUrl: '../views/feeds/universalFeed.html',
+        templateUrl: './views/feeds/universalFeed.html',
         controller: 'UniversalFeedCtrl'
       }
     }
@@ -73,7 +73,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/followersfeed',
     views: {
       'tab-followersfeed': {
-        templateUrl: '../views/feeds/followersFeed.html',
+        templateUrl: './views/feeds/followersFeed.html',
         controller: 'FollowingFeedCtrl'
       }
     }
@@ -83,55 +83,55 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/settings',
     views: {
       'tab-settings': {
-        templateUrl: '../views/settings/settings.html'
+        templateUrl: './views/settings/settings.html'
       }
     }
   });
 
   stateProvider.state('myProfile', {
     url: '/myProfile',
-    templateUrl: '../views/settings/myProfile.html',
+    templateUrl: './views/settings/myProfile.html',
     controller: 'ProfileCtrl'
   });
 
   stateProvider.state('followinglist', {
     url: '/following',
-    templateUrl: '../views/settings/followersList.html',
+    templateUrl: './views/settings/followersList.html',
     controller: 'FollowingCtrl'
   });
 
   stateProvider.state('logout', {
     url: '/logout',
-    templateUrl: '../views/auth/logout.html',
+    templateUrl: './views/auth/logout.html',
     controller: 'LogoutCtrl'
   });
 
   stateProvider.state('/workout', {
     url: '/workout',
-    templateUrl: '../views/workouts/workout.html',
+    templateUrl: './views/workouts/workout.html',
     controller: 'WorkoutCtrl'
   });
 
   stateProvider.state('editWorkout', {
     url: '/tab/editWorkout',
-    templateUrl: '../views/workouts/addEditWorkout.html',
+    templateUrl: './views/workouts/addEditWorkout.html',
     controller: 'WorkoutEditsCtrl'
   });
 
   stateProvider.state('signupLogin', {
     url: '/signuplogin',
-    templateUrl: '../views/auth/signupLogin.html'
+    templateUrl: './views/auth/signupLogin.html'
   });
 
   stateProvider.state('signup', {
     url: '/signup',
-    templateUrl: '../views/auth/signup.html',
+    templateUrl: './views/auth/signup.html',
     controller: 'SignupCtrl'
   });
 
   stateProvider.state('login', {
       url: '/login',
-      templateUrl: '../views/auth/login.html',
+      templateUrl: './views/auth/login.html',
       controller: 'LoginCtrl'
   });
 
