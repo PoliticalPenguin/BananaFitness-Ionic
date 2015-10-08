@@ -134,7 +134,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.getSpecificWorkout = function() {
     return $http({
       method: 'GET',
-      url: '/api/Move/' + wsi.selectedWorkout.id,
+      url: '/api/workout/' + wsi.selectedWorkout.id
     }).then(function(resp) {
       return resp.data;
     });
@@ -147,6 +147,17 @@ services.factory('WorkoutServices', function($http, $location, $window) {
       data: newWorkoutObj,
       headers: {'Content-Type': 'application/JSON'}
     }).then(function(resp) {
+      console.log(resp);
+      return resp.data;
+    });
+  };
+
+  wsi.deleteWorkout = function(WorkoutObj) { // change to ID
+    return $http({
+      method: 'DELETE', 
+      url: '/api/workout/' + wsi.selectedWorkout.id,
+      data: WorkoutObj 
+    }).then(function(resp) {
       return resp.data;
     });
   };
@@ -154,10 +165,12 @@ services.factory('WorkoutServices', function($http, $location, $window) {
   wsi.addMoveToWorkout = function(moveInfoObj) {
     return $http({
       method: 'POST',
-      url: '/api/move',
+      url: '/api/move/',
       data: moveInfoObj,
       headers: {'Content-Type': 'application/json'}
     }).then(function(resp) {
+      console.log("this is the data returned by addMoveToWorkout: ", resp.data);
+      console.log("this is the ID of the workout we just created: ", resp.data.id);
       return resp.data;
     });
   };

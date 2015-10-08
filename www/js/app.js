@@ -1,4 +1,4 @@
-var app = angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'CovalentFitness.services']);
+var app = angular.module('CovalentFitness', ['ionic', 'CovalentFitness.controllers', 'CovalentFitness.services', 'timer']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

@@ -20,3 +20,11 @@
 .primary-buttons{
   color: black !important;
 }
+
+.workout {
+  font-family: serif;
+}
+
+h3 {
+  margin-right: 2em;
+}

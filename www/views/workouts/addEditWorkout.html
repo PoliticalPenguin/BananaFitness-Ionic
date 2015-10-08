@@ -1,24 +1,29 @@
-<ion-view view-title="Add/Edit Workout" ng-controller="WorkoutEditsCtrl">
+<ion-view view-title="Get ready for the brutal workout known as: {{currentWorkout.name}}" ng-controller="WorkoutEditsCtrl">
+    <ion-nav-buttons side="primary">
+        <button class="button back-button buttons button-clear header-item" style="color: black;" ng-click="$ionicGoBack()">
+            <i class="ion-arrow-left-c"></i> Back
+        </button>
+    </ion-nav-buttons>
     <ion-nav-buttons side="secondary">
-
+     <h3><timer autostart="false"/></h3>
 
         <!-- <h1 class="title">{{workout.name}}</h1> -->
 
-            <button class="button button-icon ion-compose"ng-click="addEx()"></button>
+            <button class="button button-icon ion-compose"ng-click="addEx(); startTimer()"></button>
 
     </ion-nav-buttons>
     <ion-content>
+
         <ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder" can-swipe="listCanSwipe">
-            <ion-item ng-repeat="move in currentWorkout track by $index" class="item-thumbnail-left">
+            <ion-item ng-repeat="move in currentWorkout.moves track by $index" class="item-thumbnail-left">
                 <!-- <img ng-src="{{move.img}}"> if we want images-->
               <!--   <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)"> -->
-                    <h2>{{move.name}}</h2><!-- </button> -->
+                    <span class="workout">Exercise Name: </span><h2>{{move.name}}</h2><!-- </button> -->
                 <!-- <button class="button button-clear butto --><!-- n-dark" ng-click="selectWorkout(workout.id)"> -->
-                    <h2>{{move.weight}}</h2><!-- </button> -->
+                    <span class="workout">Weight: </span><h2>{{move.weight}}</h2><!-- </button> -->
                 <!-- <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)"> -->
-                    <h2>{{move.sets}}</h2><!-- </button> -->
                 <!-- <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)"> -->
-                    <h2>{{move.reps}}</h2><!-- </button> -->
+                    <span class="workout">Reps: </span><h2>{{move.reps}}</h2><!-- </button> -->
                 <!-- <p>{{move.description}}</p> if we want descriptions-->
                 <ion-option-button class="button-assertive" ng-click="deleteEx(move)">
                     Delete
@@ -26,6 +31,7 @@
                 <ion-option-button class="button-positive" ng-click="openModalEdit(move)">
                     Edit
                 </ion-option-button>
+
                 <ion-delete-button class="ion-minus-circled" ng-click="workout.splice($index, 1)">
                 </ion-delete-button>
                 <ion-reorder-button class="ion-navicon" on-reorder="reorderItem(move, $fromIndex, $toIndex)">

@@ -11,20 +11,10 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
     <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
 </head>
 
 <body ng-app="CovalentFitness">
     <ion-nav-bar class="bar-positive">
-        <ion-nav-back-button class="button-clear" style = "color:black;">
-            <i class="ion-arrow-left-c"></i> Back
-        </ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view>
         <!-- content loads here -->
@@ -32,33 +22,37 @@
     <script id="workoutAddModal.html" type="text/ng-template">
         <ion-modal-view>
             <ion-header-bar class="bar bar-header bar-positive">
-                <h1 class="title">New Exercise</h1>
+                <h1 class="title">New Exercise (from workoutAddModal inside of index.html)</h1>
                 <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
             </ion-header-bar>
             <ion-content class="padding">
                 <div class="list">
                     <label class="item item-input">
                         <span class="input-label">Exercise Name</span>
-                        <input ng-model="move.name" type="text">
+                        <input ng-model="name" type="text">
                     </label>
                     <label class="item item-input">
                         <span class="input-label">Weight</span>
-                        <input ng-model="move.weight" type="text">
-                    </label>
-                    <label class="item item-input">
-                        <span class="input-label">Sets</span>
-                        <input ng-model="move.sets" type="text">
+                        <input ng-model="weight" type="text">
                     </label>
                     <label class="item item-input">
                         <span class="input-label">Reps</span>
-                        <input ng-model="move.reps" type="text">
+                        <input ng-model="reps" type="text">
                     </label>
-                    <button class="button button-full button-positive" ng-click="createMove(move)">Create</button>
+                    <button class="button button-full button-positive" ng-click="createMove(name, weight, reps)">Create</button>
+                    <button class="button button-full button-positive" ng-click="stopTimer(); stopWorkout()">End Workout</button>
                 </div>
             </ion-content>
         </ion-modal-view>
     </script>
-
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="lib/humanize-duration/humanize-duration.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/angular-timer/dist/angular-timer.js"></script>
 </body>
 
 </html>
