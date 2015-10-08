@@ -178,6 +178,7 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   //functions for Workouts Controller ==========
 
   $scope.loadWorkoutList = function() {
+    console.log('no sense');
     WorkoutServices.getAllWorkouts()
       .then(function(allWorkouts) {
         $scope.workoutList = allWorkouts;
