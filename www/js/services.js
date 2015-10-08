@@ -63,6 +63,16 @@ services.factory('Feed', function($http, $location, $window) {
     });
   };
 
+  feed.getUserFeed = function (id) {
+    return $http({
+      method: 'GET',
+      url: '/api/user/' + id 
+    })
+    .then(function(resp) {
+      return resp.data;
+    });  
+  }
+
   feed.getFollowingFeed = function() {
     return $http({
       method: 'GET',
