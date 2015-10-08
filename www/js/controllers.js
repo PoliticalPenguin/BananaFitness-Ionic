@@ -269,8 +269,18 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
 
 contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices) {
 
-  $scope.currentWorkout = WorkoutServices.selectedWorkout;
-  console.log("$scope.currentWorkout in WorkoutCtrl: ", $scope.currentWorkout);
+  $scope.$on('$ionicView.enter', function (e) {
+    if (WorkoutServices.selectedWorkout.id !== null) {
+      $scope.currentWorkout = WorkoutServices.selectedWorkout; 
+      console.log("$scope.currentWorkout in WorkoutCtrl has been set to: ", $scope.currentWorkout);
+
+    } else {
+      $scope.currentWorkout = "Error: no workout selected.";
+      console.log("WorkoutServices.selectedWorkout.id is null, no workout was selected");
+    }
+    
+  });
+
   //functions for Workout Controller ==========
 
   // $scope.loadWorkout = function () {
