@@ -180,6 +180,14 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
     Feed.getUniversalFeed()
       .then(function(feed) {
         console.log(feed);
+        feed.forEach(function(workout) {
+          // console.log(workout.user_id);
+
+          Feed.getUserFeed(workout.user_id).then(function(user) {
+            workout.user = user.username;
+            // console.log(user.username);
+          })
+        })
         $scope.UniversalFeed = feed;
       })
       .catch(function(error) {
