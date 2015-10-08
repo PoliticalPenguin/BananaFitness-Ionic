@@ -6,13 +6,17 @@
     </ion-nav-buttons>
 
     <ion-nav-buttons side="secondary">
-        <button class="button" ng-click="editWorkout(workout.id)">Edit</button>
+<!--         <button class="button" ng-click="editWorkout(workout.id)">Edit</button>
+ -->
     </ion-nav-buttons>
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="move in workout track by $index" class="item-thumbnail-left">
+            <ion-item ng-repeat="move in currentWorkout.moves track by $index" class="item-thumbnail-left">
                 <!-- <img ng-src="{{move.img}}"> if we want images-->
-                <!-- <h2>{{move}}</h2> -->
+                    <span class="workout">Exercise Name: </span><h2>{{move.name}}</h2>
+                    <span class="workout">Weight: </span><h2>{{move.weight}}</h2><!-- </button> -->
+                    <span class="workout">Reps: </span><h2>{{move.reps}}</h2><!-- </button> -->
+
                 <!-- <p>{{move.description}}</p> if we want descriptions-->
             </ion-item>
         </ion-list>
