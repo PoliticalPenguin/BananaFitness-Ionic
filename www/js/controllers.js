@@ -1,4 +1,4 @@
-var contollers = angular.module('CovalentFitness.controllers', ['timer', 'chart.js'])
+var contollers = angular.module('CovalentFitness.controllers', ['timer', 'chart.js', 'CovalentFitness.services'])
 
 contollers.controller('AppCtrl', function($scope) {
 
@@ -87,7 +87,7 @@ contollers.controller('ProfileCtrl', function($scope, $location, $http, Auth) {
 
 })
 
-contollers.controller('GraphCtrl', function($scope, $location) {
+contollers.controller('GraphCtrl', function($scope, $location, WorkoutServices) {
   $scope.graph = {};
 
   var response = {
@@ -156,14 +156,20 @@ contollers.controller('GraphCtrl', function($scope, $location) {
     }
 }
 
-  $scope.graph.data = [                     // Add bar data, this will set your bars height in the graph
-      //Awake
-      [16, 15, 20, 12, 16, 12, 8],
-      //Asleep
-      [8, 9, 4, 12, 8, 12, 14]
-    ];
-    $scope.graph.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];    // Add labels for the X-axis
-    $scope.graph.series = ['Awake', 'Asleep'];  // Add information for the hover/touch effect
+  var HRVals = [response["activities-heart-intraday"].dataset.map(function(elem) {
+    return elem.value;
+  })];
+  var HRTimes = response['activities-heart-intraday'].dataset.map(function(elem) {
+    return elem.time;
+  });
+
+  $scope.movesData = WorkoutServices.getMoves()
+  .then(function(resp) {
+    console.log(resp);
+  });
+
+  $scope.graph.data = HRVals;
+  $scope.graph.labels = HRTimes;
 })
 
 contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
