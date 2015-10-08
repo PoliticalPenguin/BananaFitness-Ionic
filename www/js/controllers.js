@@ -218,8 +218,6 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
     WorkoutServices.setWorkout(wrkt);
   };
 
-  $scope.loadWorkoutList();
-
   //==========
 
   $scope.showPopup = function() {
