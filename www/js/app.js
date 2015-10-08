@@ -45,7 +45,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
   stateProvider.state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: './views/tabs.html'
+    templateUrl: function() {
+      if (ionic.Platform.isIOS()) {
+        console.log('Serving iOS tabs!');
+        return './views/iOStabs.html'
+      }
+      return './views/tabs.html';
+    }
   });
 
   //View all the workouts
@@ -85,7 +91,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/graphs',
     views: {
       'tab-graphs': {
-        templateUrl: '../views/graphs/graphs.html',
+        templateUrl: './views/graphs/graphs.html',
         controller: 'GraphCtrl'
       }
     }

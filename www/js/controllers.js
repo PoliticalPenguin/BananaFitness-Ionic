@@ -36,7 +36,9 @@ contollers.controller('LoginCtrl', function($scope, $location, Auth) {
     Auth.login($scope.loginData)
       .then(function() {
         $location.path('/tab/workouts');
-        window.open('https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/authorize');
+          // if (ionic.Platform.isIOS()) {
+          //   window.open('https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/authorize');
+          // }
       })
       .catch(function(error) {
         console.error(error);
