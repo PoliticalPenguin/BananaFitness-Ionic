@@ -83,7 +83,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/graphs',
     views: {
       'tab-graphs': {
-        templateUrl: '../views/graphs/graphs.html'
+        templateUrl: '../views/graphs/graphs.html',
+        controller: 'GraphCtrl'
       }
     }
   });
