@@ -190,16 +190,6 @@ services.factory('WorkoutServices', function($http, $location, $window) {
     });
   };
 
-  wsi.getMoves = function() {
-    return $http({
-      method: 'GET',
-      url: '/api/moves'
-    })
-    .then(function(resp) {
-      return resp.data;
-    });
-  };
-
   wsi.addMoveToWorkout = function(moveInfoObj) {
     return $http({
       method: 'POST',
