@@ -137,7 +137,7 @@ services.factory('WorkoutServices', function($http, $location, $window) {
       return $http({
         method: 'GET',
         url: '/api/workout/' + wrktID
-      }).then(function(resp) {
+      }).then(function (resp) {
         return resp.data;
       });
     } else {
@@ -145,6 +145,19 @@ services.factory('WorkoutServices', function($http, $location, $window) {
     }
   };
 
+  wsi.getMovesInWorkout = function (wrktID) {
+    if (wrktID) {
+      return $http({
+        method: 'GET',
+        url: '/api/moves/' + wrktID
+      }).then(function (resp) {
+        return resp.data;
+      });
+    } else {
+      console.log('We are not calling the DB because wrktID may be null or undefined. Here is wrktID: ', wrktID);
+    }
+  };
+  
   wsi.addNewWorkout = function(newWorkoutObj) {
     return $http({
       method: 'POST', // need a backend route for put

@@ -187,13 +187,19 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   $scope.selectWorkout = function(wrkt) {
     console.log("here is the workout id being selected: ", wrkt);
     WorkoutServices.getSpecificWorkout(wrkt)
-      .then(function(specWorkout) {
+      .then(function (specWorkout) {
         console.log('loaded the workout: ', specWorkout);
-        WorkoutServices.setNewWorkout({
-          name: $scope.newWorkout.name,
-          id: null
+        WorkoutServices.getMovesInWorkout(specWorkout.id)
+        .then(function (moves) {
+          WorkoutServices.setNewWorkout({
+            name: specWorkout.name,
+            id: specWorkout.id,
+            moves: moves
+          });
+          console.log('WorkoutServices.selectedWorkout just got set: ', WorkoutServices.selectedWorkout);
+          $location.path('/workout');
         });
-        $location.path('/tab/editWorkout');
+
       });
   };
 
@@ -263,26 +269,35 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
 
 contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices) {
 
-  $scope.workout = null;
+  $scope.$on('$ionicView.enter', function (e) {
+    if (WorkoutServices.selectedWorkout.id !== null) {
+      $scope.currentWorkout = WorkoutServices.selectedWorkout; 
+      console.log("$scope.currentWorkout in WorkoutCtrl has been set to: ", $scope.currentWorkout);
+
+    } else {
+      $scope.currentWorkout = "Error: no workout selected.";
+      console.log("WorkoutServices.selectedWorkout.id is null, no workout was selected");
+    }
+    
+  });
 
   //functions for Workout Controller ==========
 
-  $scope.loadWorkout = function() {
-    WorkoutServices.getSpecificWorkout()
-      .then(function(specWorkout) {
-        $scope.workout = specWorkout;
-        console.log('loaded the workout: ', $scope.workout);
-      });
-  };
+  // $scope.loadWorkout = function () {
+  //   WorkoutServices.getSpecificWorkout()
+  //     .then(function(specWorkout) {
+  //       $scope.workout = specWorkout;
+  //       console.log('loaded the workout: ', $scope.workout);
+  //     });
+  // };
+
+  // $scope.editWorkout = function(wrkt) {
+  //   WorkoutServices.setWorkout(wrkt);
+  //   $location.path('/tab/editWorkout');
+  // };
 
 
-  $scope.editWorkout = function(wrkt) {
-    WorkoutServices.setWorkout(wrkt);
-    $location.path('/tab/editWorkout');
-  };
-
-
-  $scope.loadWorkout();
+  // $scope.loadWorkout();
 
 })
 
