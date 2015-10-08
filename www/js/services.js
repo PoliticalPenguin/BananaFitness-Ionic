@@ -131,13 +131,18 @@ services.factory('WorkoutServices', function($http, $location, $window) {
     });
   };
 
-  wsi.getSpecificWorkout = function() {
-    return $http({
-      method: 'GET',
-      url: '/api/workout/' + wsi.selectedWorkout.id
-    }).then(function(resp) {
-      return resp.data;
-    });
+  wsi.getSpecificWorkout = function(wrktID) {
+    wrktID = wrktID || wsi.selectedWorkout.id;
+    if (wrktID) {
+      return $http({
+        method: 'GET',
+        url: '/api/workout/' + wrktID
+      }).then(function(resp) {
+        return resp.data;
+      });
+    } else {
+      console.log('We are not calling the DB because wrktID may be null or undefined. Here is wrktID: ', wrktID);
+    }
   };
 
   wsi.addNewWorkout = function(newWorkoutObj) {
