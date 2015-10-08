@@ -183,14 +183,14 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   $scope.listCanSwipe = true;
   $scope.workoutList = [];
 
-  //functions for Workouts Controller ==========
-
-  $scope.loadWorkoutList = function() {
+  //functions for Workouts Controller =========
+  $scope.$on('$ionicView.enter', function (e) {
     WorkoutServices.getAllWorkouts()
       .then(function(allWorkouts) {
         $scope.workoutList = allWorkouts;
+        console.log('this is $scope.workoutList: ', $scope.workoutList);
       });
-  };
+  });
 
   $scope.selectWorkout = function(wrkt) {
     console.log("here is the workout id being selected: ", wrkt);
