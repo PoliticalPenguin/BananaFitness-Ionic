@@ -1,5 +1,7 @@
 var contollers = angular.module('CovalentFitness.controllers', ['ionic', 'timer', 'chart.js', 'CovalentFitness.services', 'ngCordova'])
 
+// We don't have time to rework the server to save our new workout objects properly. This is for demo purposes
+var hackish_hardcode_of_doom = [];
 contollers.controller('AppCtrl', function($scope) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -91,7 +93,9 @@ contollers.controller('ProfileCtrl', function($scope, $location, $http, Auth) {
 })
 
 contollers.controller('GraphCtrl', function($scope, $location, WorkoutServices) {
-  $scope.graph = {};
+  $scope.hr = {};
+  
+  Chart.defaults.global.scaleFontSize = 24;
 
   var response = {
     "activities-heart": [
@@ -166,8 +170,18 @@ contollers.controller('GraphCtrl', function($scope, $location, WorkoutServices) 
     return elem.time;
   });
 
-  $scope.graph.data = HRVals;
-  $scope.graph.labels = HRTimes;
+  $scope.hr.data = HRVals;
+  $scope.hr.labels = HRTimes;
+
+  $scope.cal = {};
+  var CalData = [hackish_hardcode_of_doom.map(function(elem) {
+    return elem.caloriesBurned;
+  })];
+  var CalTimes = hackish_hardcode_of_doom.map(function(elem) {
+    return moment(elem.time).format('mm:ss');
+  });
+  $scope.cal.data = CalData;
+  $scope.cal.labels = CalTimes;
 })
 
 contollers.controller('FitbitCtrl', function($window, $rootScope, $ionicPlatform, $scope, $location, $http, $cordovaInAppBrowser) {
@@ -419,6 +433,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
   $scope.endTime;
    
   $scope.startTimer = function () {
+    hackish_hardcode_of_doom = [];
     $scope.$broadcast('timer-start');
     $scope.startTime = Date.now();
     $scope.timerRunning = true;
@@ -482,18 +497,26 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     //     $scope.loadCurrentWorkout();
     //   });
     // console.log(name);
+    $scope.lastTime = ($scope.lastTime || $scope.startTime);
+
+    // Save it so we can graph it
+    hackish_hardcode_of_doom.push({
+      'caloriesBurned': weight,
+      'time': Date.now()
+    });
 
     // Send it to the fitbit auth (using the server as middleman)
-    $scope.lastTime = ($scope.lastTime || $scope.startTime);
     console.log('start time in format', moment($scope.lastTime).format('HH:mm:ss'));
-    WorkoutServices.saveActivity({
+    // Object formatted as fitbit-friendly
+    var saveObj = {
       'activityName': name,
       'manualCalories': weight, // because why not
       'startTime': moment($scope.lastTime).format('HH:mm:ss'),
       'durationMillis': Date.now() - $scope.lastTime,
       'date': moment().format('YYYY-MM-DD'),
       'distance': 1 // because why not also
-    }).then(function(resp) {
+    }
+    WorkoutServices.saveActivity(saveObj).then(function(resp) {
       console.log('RESP FROM FITBIT API', resp);
     });
     $scope.lastTime = Date.now();
