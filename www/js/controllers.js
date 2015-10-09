@@ -163,10 +163,6 @@ contollers.controller('GraphCtrl', function($scope, $location, WorkoutServices) 
     return elem.time;
   });
 
-  .then(function(resp) {
-    console.log(resp);
-  });
-
   $scope.graph.data = HRVals;
   $scope.graph.labels = HRTimes;
 })
@@ -460,8 +456,8 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     console.log($scope.endTime);
     if ($scope.currentWorkout.name !== null) {
       // Send it to the fitbit auth (using the server as middleman)
-      WorkoutServices.saveActivity({
-      });
+      // WorkoutServices.saveActivity({
+      // });
       WorkoutServices.addNewWorkout({
         name: $scope.currentWorkout.name,
       })
