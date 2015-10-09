@@ -227,5 +227,15 @@ services.factory('WorkoutServices', function($http, $location, $window) {
     });
   };
 
+  wsi.saveActivity = function(fitbitMoveObj) {
+    return $http({
+      method: 'POST', 
+      url: '/auth/fitbit/activities',
+      data: fitbitMoveObj // is in same pattern as provided to the fitbit api
+    }).then(function(resp) {
+      return resp.data;
+    });
+  };
+
   return wsi;
 });

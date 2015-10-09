@@ -378,6 +378,7 @@ contollers.controller('WorkoutCtrl', function($scope, $location, WorkoutServices
 
 contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModal, WorkoutServices) {
   $scope.startTime;
+  $scope.lastTime;
   $scope.endTime;
    
   $scope.startTimer = function () {
@@ -444,6 +445,19 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     //     $scope.loadCurrentWorkout();
     //   });
     // console.log(name);
+
+    // Send it to the fitbit auth (using the server as middleman)
+    $scope.lastTime = ($scope.lastTime || $scope.startTime);
+    WorkoutServices.saveActivity({
+      'activityName': name,
+      'manualCalories': weight, 
+      'startTime': $scope.lastTime,
+      'durationMillis': moment()._d - $scope.lastTime,
+      'date': moment().format('YYYY-MM-DD'),
+      'distance': 1
+    });
+    $scope.lastTime = moment()._d;
+
     $scope.currentWorkout.moves.push({name:name, weight: weight, reps: reps, time: moment()._d});
     console.log($scope.currentWorkout.moves);
     // $scope.closeModal();
@@ -455,9 +469,6 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     $scope.closeModal();
     console.log($scope.endTime);
     if ($scope.currentWorkout.name !== null) {
-      // Send it to the fitbit auth (using the server as middleman)
-      // WorkoutServices.saveActivity({
-      // });
       WorkoutServices.addNewWorkout({
         name: $scope.currentWorkout.name,
       })
