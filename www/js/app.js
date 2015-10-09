@@ -27,12 +27,17 @@ app.factory('middlewareAPI', function() {
             var url = config.url;
             var pathArray = url.split('/');
             var firstPath = pathArray[1];
-            if ((firstPath === 'api') || (firstPath === 'auth')) {
+            if (firstPath === 'api') {
+              config.url = "https://covalent-fitness-api.herokuapp.com" + config.url;
+            }
+            else if (firstPath === 'auth') {
               config.url = "https://penguin-banana-fitness-api.herokuapp.com" + config.url;
+            }
               //Our server: https://penguin-banana-fitness-api.herokuapp.com
               //local server: http://localhost:8080
               //THEIR server: https://covalent-fitness-api.herokuapp.com
-            }
+              // config.url = "https://covalent-fitness-api.herokuapp.com" + config.url;
+
             return config;
         }
     };
