@@ -383,9 +383,9 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
    
   $scope.startTimer = function () {
     $scope.$broadcast('timer-start');
-    $scope.startTime = moment()._d;
+    $scope.startTime = Date.now();
     $scope.timerRunning = true;
-    console.log($scope.startTime);
+    console.log('timer-start',$scope.startTime);
   };
 
   $scope.stopTimer = function () {
@@ -448,24 +448,27 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
 
     // Send it to the fitbit auth (using the server as middleman)
     $scope.lastTime = ($scope.lastTime || $scope.startTime);
+    console.log('start time in format', moment($scope.lastTime).format('HH:mm:ss'));
     WorkoutServices.saveActivity({
       'activityName': name,
-      'manualCalories': weight, 
-      'startTime': $scope.lastTime,
-      'durationMillis': moment()._d - $scope.lastTime,
+      'manualCalories': weight, // because why not
+      'startTime': moment($scope.lastTime).format('HH:mm:ss'),
+      'durationMillis': Date.now() - $scope.lastTime,
       'date': moment().format('YYYY-MM-DD'),
-      'distance': 1
+      'distance': 1 // because why not also
+    }).then(function(resp) {
+      console.log('RESP FROM FITBIT API', resp);
     });
-    $scope.lastTime = moment()._d;
+    $scope.lastTime = Date.now();
 
-    $scope.currentWorkout.moves.push({name:name, weight: weight, reps: reps, time: moment()._d});
+    $scope.currentWorkout.moves.push({name:name, weight: weight, reps: reps, time: Date.now()});
     console.log($scope.currentWorkout.moves);
     // $scope.closeModal();
   };
 
 
   $scope.stopWorkout = function () {
-    $scope.endTime = moment()._d;
+    $scope.endTime = Date.now();
     $scope.closeModal();
     console.log($scope.endTime);
     if ($scope.currentWorkout.name !== null) {
