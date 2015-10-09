@@ -227,8 +227,9 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
       });
   };
 
-  $scope.selectWorkout = function(wrkt) {
-    $location.path('/tab/workout');
+  $scope.selectWorkout = function(id) {
+    console.log(id);
+    // $location.path('/tab/workout');
   };
 
   $scope.loadUniversalFeed();
@@ -291,8 +292,8 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   $scope.$on('$ionicView.enter', function (e) {
     WorkoutServices.getAllWorkouts()
       .then(function(allWorkouts) {
-        $scope.workoutList = allWorkouts;
-        console.log('this is $scope.workoutList: ', $scope.workoutList);
+        console.log(allWorkouts);
+        $scope.workoutList = allWorkouts.reverse();
       });
   });
 
