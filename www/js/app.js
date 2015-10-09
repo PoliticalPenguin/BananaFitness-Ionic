@@ -28,7 +28,7 @@ app.factory('middlewareAPI', function() {
             var pathArray = url.split('/');
             var firstPath = pathArray[1];
             if ((firstPath === 'api') || (firstPath === 'auth')) {
-              config.url = "https://covalent-fitness-api.herokuapp.com" + config.url;
+              config.url = "https://penguin-banana-fitness-api.herokuapp.com" + config.url;
               //Our server: https://penguin-banana-fitness-api.herokuapp.com
               //local server: http://localhost:8080
               //THEIR server: https://covalent-fitness-api.herokuapp.com
@@ -45,7 +45,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
   stateProvider.state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: './views/tabs.html'
+    templateUrl: function() {
+      if (ionic.Platform.isIOS()) {
+        console.log('Serving iOS tabs!');
+        return './views/iOStabs.html'
+      }
+      return './views/tabs.html';
+    }
   });
 
   //View all the workouts
@@ -85,7 +91,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/graphs',
     views: {
       'tab-graphs': {
-        templateUrl: '../views/graphs/graphs.html',
+        templateUrl: './views/graphs/graphs.html',
         controller: 'GraphCtrl'
       }
     }
@@ -96,6 +102,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
     views: {
       'tab-settings': {
         templateUrl: './views/settings/settings.html'
+      }
+    }
+  });
+
+  stateProvider.state('tab.fitbit', {
+    url: '/fitbit',
+    views: {
+      'tab-fitbit': {
+        templateUrl: './views/fitbit/fitbit.html',
+        controller: 'FitbitCtrl'
       }
     }
   });
