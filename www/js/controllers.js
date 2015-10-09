@@ -1,4 +1,4 @@
-var contollers = angular.module('CovalentFitness.controllers', ['timer', 'chart.js'])
+var contollers = angular.module('CovalentFitness.controllers', ['timer', 'chart.js', 'CovalentFitness.services'])
 
 contollers.controller('AppCtrl', function($scope) {
 
@@ -87,17 +87,84 @@ contollers.controller('ProfileCtrl', function($scope, $location, $http, Auth) {
 
 })
 
-contollers.controller('GraphCtrl', function($scope, $location) {
+contollers.controller('GraphCtrl', function($scope, $location, WorkoutServices) {
   $scope.graph = {};
 
-  $scope.graph.data = [                     // Add bar data, this will set your bars height in the graph
-      //Awake
-      [16, 15, 20, 12, 16, 12, 8],
-      //Asleep
-      [8, 9, 4, 12, 8, 12, 14]
-    ];
-    $scope.graph.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];    // Add labels for the X-axis
-    $scope.graph.series = ['Awake', 'Asleep'];  // Add information for the hover/touch effect
+  var response = {
+    "activities-heart": [
+        {
+            "customHeartRateZones": [],
+            "dateTime": "today",
+            "heartRateZones": [
+                {
+                    "caloriesOut": 2.3246,
+                    "max": 94,
+                    "min": 30,
+                    "minutes": 2,
+                    "name": "Out of Range"
+                },
+                {
+                    "caloriesOut": 0,
+                    "max": 132,
+                    "min": 94,
+                    "minutes": 0,
+                    "name": "Fat Burn"
+                },
+                {
+                    "caloriesOut": 0,
+                    "max": 160,
+                    "min": 132,
+                    "minutes": 0,
+                    "name": "Cardio"
+                },
+                {
+                    "caloriesOut": 0,
+                    "max": 220,
+                    "min": 160,
+                    "minutes": 0,
+                    "name": "Peak"
+                }
+            ],
+            "value": "64.2"
+        }
+    ],
+    "activities-heart-intraday": {
+        "dataset": [
+            {
+                "time": "00:00:00",
+                "value": 64
+            },
+            {
+                "time": "00:00:10",
+                "value": 63
+            },
+            {
+                "time": "00:00:20",
+                "value": 64
+            },
+            {
+                "time": "00:00:30",
+                "value": 65
+            },
+            {
+                "time": "00:00:45",
+                "value": 65
+            }
+        ],
+        "datasetInterval": 1,
+        "datasetType": "second"
+    }
+}
+
+  var HRVals = [response["activities-heart-intraday"].dataset.map(function(elem) {
+    return elem.value;
+  })];
+  var HRTimes = response['activities-heart-intraday'].dataset.map(function(elem) {
+    return elem.time;
+  });
+
+  $scope.graph.data = HRVals;
+  $scope.graph.labels = HRTimes;
 })
 
 contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
@@ -388,6 +455,9 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
     $scope.closeModal();
     console.log($scope.endTime);
     if ($scope.currentWorkout.name !== null) {
+      // Send it to the fitbit auth (using the server as middleman)
+      // WorkoutServices.saveActivity({
+      // });
       WorkoutServices.addNewWorkout({
         name: $scope.currentWorkout.name,
       })
