@@ -10,7 +10,7 @@
  -->
     </ion-nav-buttons>
     <ion-content>
-        <ion-list>
+        <ion-list ng-if="currentWorkout.moves.length > 0 && currentWorkout.moves !== 'There are no moves for this workout'" >
             <ion-item ng-repeat="move in currentWorkout.moves track by $index" class="item-thumbnail-left">
                 <!-- <img ng-src="{{move.img}}"> if we want images-->
                 <!-- TO DO: figure out how to not repeat if there is nothing in the array -->
@@ -21,5 +21,8 @@
                 <!-- <p>{{move.description}}</p> if we want descriptions-->
             </ion-item>
         </ion-list>
+        <h2 ng-hide="currentWorkout.moves.length > 0 && currentWorkout.moves !== 'There are no moves for this workout'">
+            You have literally done nothing for this whole workout.
+        </h2>
     </ion-content>
 </ion-view>

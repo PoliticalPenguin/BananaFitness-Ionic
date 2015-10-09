@@ -1,11 +1,11 @@
 <ion-view view-title="Your Workouts">
     <ion-nav-buttons side="secondary">
-        <button class="button" ng-click="addWorkout()" ng-init="loadWorkoutList()">NEW</button>
+        <button class="button" ng-click="addWorkout()">NEW</button>
     </ion-nav-buttons>
     <ion-content>
     
         <!-- maybe change subheader to footer or header bar, also think of changin buttons to clear for more modern look.  These changes can be done later though after we talk more about css and design of app -->
-        <ion-list show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+        <ion-list show-delete="shouldShowDelete" can-swipe="listCanSwipe" ng-if="workoutList.length > 0 && workoutList !== 'There are no workouts for this user'">
             <ion-item ng-repeat="workout in workoutList track by $index" class="item-thumbnail-left">
                 <img src = "http://pspfitness.com/wp-content/uploads/2014/01/Sports-Dumbbell-icon.png">
                 <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
@@ -17,5 +17,8 @@
                 </ion-delete-button>
             </ion-item>
         </ion-list>
+        <h2 ng-hide="workoutList.length > 0 && workoutList !== 'There are no workouts for this user'">
+            Bro you haven't done any workouts yet.
+        </h2>
     </ion-content>
 </ion-view>
