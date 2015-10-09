@@ -3,9 +3,9 @@
     <ion-list>
       <ion-item ng-repeat="workout in FollowingFeed track by $index">
         <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
-            <h2>{{workout.name}}</h2></button>
+            <h2>{{workout}}</h2></button>
         <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
-            <h3>{{workout.user}}</h3></button>
+            <h3>{{workout}}</h3></button>
       </ion-item>
     </ion-list>
   </ion-content>

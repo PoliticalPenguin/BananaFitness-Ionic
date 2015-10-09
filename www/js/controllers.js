@@ -59,6 +59,10 @@ contollers.controller('LogoutCtrl', function($scope, $location, Auth) {
         console.error(error);
       });
   };
+
+  $scope.navigate = function() {
+    $location.path('/tab/settings')
+  };
 })
 
 contollers.controller('ProfileCtrl', function($scope, $location, $http, Auth) {
@@ -232,6 +236,10 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
     // $location.path('/tab/workout');
   };
 
+  $scope.followUser = function (userId) {
+    console.log(userId);
+  }
+
   $scope.loadUniversalFeed();
 })
 
@@ -280,6 +288,10 @@ contollers.controller('FollowingCtrl', function($scope, $location, Following) {
       .catch(function(error) {
         console.error(error);
       });
+  };
+
+  $scope.navigate = function() {
+    $location.path('/tab/settings')
   };
 })
 

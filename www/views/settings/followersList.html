@@ -1,9 +1,14 @@
 <ion-view view-title="Following">
+  <ion-nav-buttons side="primary" style = "color:black;">
+      <i class="ion-arrow-left-c" ng-click='navigate()'></i> Back
+  </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="user in users">
+      <h3>I hate you</h3>
       <button class="button button-clear button-dark">
-          <h2>{{followingUsers.name}}</h2></button>
+          <h2>{{followingUsers.name}}</h2>
+      </button>
       </ion-item>
     </ion-list>
   </ion-content>
