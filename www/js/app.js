@@ -106,6 +106,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   });
 
+  stateProvider.state('tab.fitbit', {
+    url: '/fitbit',
+    views: {
+      'tab-fitbit': {
+        templateUrl: './views/fitbit/fitbit.html'
+      }
+    }
+  });
+
   stateProvider.state('myProfile', {
     url: '/myProfile',
     templateUrl: './views/settings/myProfile.html',
