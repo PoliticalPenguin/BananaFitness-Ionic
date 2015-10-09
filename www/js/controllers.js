@@ -244,11 +244,9 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
   }
 
   $scope.selectUserFeed = function (user) {
-    console.log(user);
     $scope.UniversalFeed = $scope.UniversalFeed.filter(function(workout) {
       return workout.user === user;
     })
-    console.log($scope.UniversalFeed.length);
   }
 
 
