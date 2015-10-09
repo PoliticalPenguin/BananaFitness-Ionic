@@ -1,6 +1,7 @@
 var contollers = angular.module('CovalentFitness.controllers', ['timer', 'chart.js', 'CovalentFitness.services'])
 
 // We don't have time to rework the server to save our new workout objects properly. This is for demo purposes
+var cumCalories = 0;
 var hackish_hardcode_of_doom = [];
 contollers.controller('AppCtrl', function($scope) {
 
@@ -464,7 +465,7 @@ contollers.controller('WorkoutEditsCtrl', function($scope, $location, $ionicModa
 
     // Save it so we can graph it
     hackish_hardcode_of_doom.push({
-      'caloriesBurned': weight,
+      'caloriesBurned': weight*reps+cumCalories,
       'time': Date.now()
     });
 
