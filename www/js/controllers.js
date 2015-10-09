@@ -215,7 +215,7 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
   $scope.loadUniversalFeed = function() {
     Feed.getUniversalFeed()
       .then(function(feed) {
-        console.log(feed);
+        console.log(feed.length);
         feed.forEach(function(workout) {
           // console.log(workout.user_id);
 
@@ -237,8 +237,20 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
   };
 
   $scope.followUser = function (userId) {
-    console.log(userId);
+    Feed.followUser(userId)
+      .then(function() {
+        console.log('blah');
+      })
   }
+
+  $scope.selectUserFeed = function (user) {
+    console.log(user);
+    $scope.UniversalFeed = $scope.UniversalFeed.filter(function(workout) {
+      return workout.user === user;
+    })
+    console.log($scope.UniversalFeed.length);
+  }
+
 
   $scope.loadUniversalFeed();
 })

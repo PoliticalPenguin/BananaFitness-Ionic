@@ -83,6 +83,17 @@ services.factory('Feed', function($http, $location, $window) {
     });
   };
 
+  feed.followUser = function () {
+    return $http({
+      method:'POST',
+      url: '/api/follow'
+    })
+    .then(function(resp) {
+      console.log(resp.data);
+      return resp.data;
+    });
+  };
+
   return feed;
 })
 
