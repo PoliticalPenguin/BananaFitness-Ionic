@@ -1,4 +1,4 @@
-var contollers = angular.module('CovalentFitness.controllers', ['timer', 'chart.js', 'CovalentFitness.services'])
+var contollers = angular.module('CovalentFitness.controllers', ['ionic', 'timer', 'chart.js', 'CovalentFitness.services', 'ngCordova'])
 
 contollers.controller('AppCtrl', function($scope) {
 
@@ -35,10 +35,11 @@ contollers.controller('LoginCtrl', function($scope, $location, Auth) {
   $scope.doLogin = function() {
     Auth.login($scope.loginData)
       .then(function() {
+
+        if (!ionic.Platform.isIOS()) {
+          window.open('https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/authorize');
+        }
         $location.path('/tab/workouts');
-          if (!ionic.Platform.isIOS()) {
-            window.open('https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/authorize');
-          }
       })
       .catch(function(error) {
         console.error(error);
@@ -167,6 +168,40 @@ contollers.controller('GraphCtrl', function($scope, $location, WorkoutServices) 
 
   $scope.graph.data = HRVals;
   $scope.graph.labels = HRTimes;
+})
+
+contollers.controller('FitbitCtrl', function($window, $rootScope, $ionicPlatform, $scope, $location, $http, $cordovaInAppBrowser) {
+  $ionicPlatform.ready(function() {
+
+    var fitbitURI = 'https://www.fitbit.com/login?redirect=%2Foauth2%2Fauthorize%3Fredirect_uri%3Dhttp%253A%252F%252Fpenguin-banana-fitness-api.herokuapp.com%252Fauth%252Ffitbit%252Fcallback%26scope%3Dactivity%26scope%3Dprofile%26scope%3Dheartrate%26response_type%3Dcode%26client_id%3D229WNK';
+    var authWindow = $window.open(fitbitURI, '_self', 'location=no,toolbar=no,hidden=yes');
+    authWindow.addEventListener('loadstop', function (event) {
+      console.log('hi');
+      if(event.url.match('auth/fitbit/callback')) {
+        authWindow.close();
+      }
+    });
+
+    // $rootScope.$on('$cordovaInAppBrowser:loadstart', function(event) {
+    //   console.log('starting to load page');
+    // });
+    // $rootScope.$on('$cordovaInAppBrowser:loadstop', function(event) {
+    //   // console.log('hi');
+    //   // if(event.url.match(/callback/)) {
+    //     $cordovaInAppBrowser.close();
+    //   // }
+    // });
+    // $rootScope.$on('$cordovaInAppBrowser:exit', function(event) {
+    //   $location.path('/tab/workouts');
+    // });
+
+    // $cordovaInAppBrowser.open(fitbitURI, '_blank', options);
+  });
+  
+  
+  // $timeout(function() {
+  //   $cordovaInAppBrowser.close();
+  // }, 3000);
 })
 
 contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {

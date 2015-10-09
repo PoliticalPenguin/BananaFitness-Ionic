@@ -28,7 +28,7 @@ app.factory('middlewareAPI', function() {
             var pathArray = url.split('/');
             var firstPath = pathArray[1];
             if ((firstPath === 'api') || (firstPath === 'auth')) {
-              config.url = "https://covalent-fitness-api.herokuapp.com" + config.url;
+              config.url = "https://penguin-banana-fitness-api.herokuapp.com" + config.url;
               //Our server: https://penguin-banana-fitness-api.herokuapp.com
               //local server: http://localhost:8080
               //THEIR server: https://covalent-fitness-api.herokuapp.com
@@ -110,7 +110,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/fitbit',
     views: {
       'tab-fitbit': {
-        templateUrl: './views/fitbit/fitbit.html'
+        templateUrl: './views/fitbit/fitbit.html',
+        controller: 'FitbitCtrl'
       }
     }
   });
