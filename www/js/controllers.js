@@ -61,6 +61,10 @@ contollers.controller('LogoutCtrl', function($scope, $location, Auth) {
         console.error(error);
       });
   };
+
+  $scope.navigate = function() {
+    $location.path('/tab/settings')
+  };
 })
 
 contollers.controller('ProfileCtrl', function($scope, $location, $http, Auth) {
@@ -225,7 +229,7 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
   $scope.loadUniversalFeed = function() {
     Feed.getUniversalFeed()
       .then(function(feed) {
-        console.log(feed);
+        console.log(feed.length);
         feed.forEach(function(workout) {
           // console.log(workout.user_id);
 
@@ -241,9 +245,24 @@ contollers.controller('UniversalFeedCtrl', function($scope, $location, Feed) {
       });
   };
 
-  $scope.selectWorkout = function(wrkt) {
-    $location.path('/tab/workout');
+  $scope.selectWorkout = function(id) {
+    console.log(id);
+    // $location.path('/tab/workout');
   };
+
+  $scope.followUser = function (userId) {
+    Feed.followUser(userId)
+      .then(function() {
+        console.log('blah');
+      })
+  }
+
+  $scope.selectUserFeed = function (user) {
+    $scope.UniversalFeed = $scope.UniversalFeed.filter(function(workout) {
+      return workout.user === user;
+    })
+  }
+
 
   $scope.loadUniversalFeed();
 })
@@ -294,6 +313,10 @@ contollers.controller('FollowingCtrl', function($scope, $location, Following) {
         console.error(error);
       });
   };
+
+  $scope.navigate = function() {
+    $location.path('/tab/settings')
+  };
 })
 
 contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, WorkoutServices) {
@@ -305,8 +328,8 @@ contollers.controller('WorkoutsCtrl', function($scope, $location, $ionicPopup, W
   $scope.$on('$ionicView.enter', function (e) {
     WorkoutServices.getAllWorkouts()
       .then(function(allWorkouts) {
-        $scope.workoutList = allWorkouts;
-        console.log('this is $scope.workoutList: ', $scope.workoutList);
+        console.log(allWorkouts);
+        $scope.workoutList = allWorkouts.reverse();
       });
   });
 

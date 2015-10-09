@@ -1,12 +1,19 @@
 <ion-view view-title="Universal Feed">
+  <ion-nav-buttons side="primary">
+      <button class="button back-button buttons button-clear header-item" style="color: black;" ng-click="loadUniversalFeed()">
+       Universal Feed
+      </button>
+  </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="workout in UniversalFeed track by $index">
         <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
             <h2>{{workout.name}}</h2></button>
-        <button class="button button-clear button-dark" ng-click="selectWorkout(workout.id)">
+        <button class="button button-clear button-dark" ng-click="selectUserFeed(workout.user)">
             <h3>{{workout.user}}</h3></button>
       </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>
+
+
